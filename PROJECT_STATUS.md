@@ -4,6 +4,7 @@
 
 - React/TypeScript/Vite single-page application with a responsive portfolio layout.
 - Hero with a locally stored avatar, GSAP pointer response, dynamic floor shadow, and entrance animations.
+- Mobile hero avatar motion uses device orientation with an iOS permission button, touch fallback, calibration, and reduced-motion support; physical iPhone and Android checks are still pending.
 - Scroll-linked image marquee, animated About text, service list, and sticky-stacking project preview cards.
 - Project preview dialog with close and backdrop interactions.
 - Responsive CSS and reduced-motion styling.

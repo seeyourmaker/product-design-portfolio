@@ -3,21 +3,23 @@ import {createRoot} from 'react-dom/client';
 import {motion,useScroll,useTransform,useReducedMotion,MotionValue} from 'framer-motion';
 import {ArrowUpRight,X} from 'lucide-react';
 import {gsap} from 'gsap';
+import {useMobileAvatarMotion} from './useMobileAvatarMotion';
 import assets from './assets.json';
 import './style.css';
 
 function FadeIn({children,delay=0,y=30,x=0,className=''}:{children:React.ReactNode,delay?:number,y?:number,x?:number,className?:string}){return <motion.div className={className} initial={{opacity:0,x,y}} whileInView={{opacity:1,x:0,y:0}} viewport={{once:true,margin:'50px',amount:0}} transition={{duration:.7,delay,ease:[.25,.1,.25,1]}}>{children}</motion.div>}
 function ContactButton(){return <a className="contact-button" href="#contact">Contact Me</a>}
 type MagnetPosition = {x:number,y:number,active:boolean};
-function Magnet({children,onMove}:{children:React.ReactNode,onMove?:(position:MagnetPosition)=>void}){
+function Magnet({children,onMove,shadowRef}:{children:React.ReactNode,onMove?:(position:MagnetPosition)=>void,shadowRef:React.RefObject<HTMLDivElement>}){
   const ref=useRef<HTMLDivElement>(null);
   const moving=useRef<HTMLDivElement>(null);
   const reduced=useReducedMotion();
+  const {status,enableMotion}=useMobileAvatarMotion(moving,shadowRef,reduced);
   useEffect(()=>{
     const wrapper=ref.current, avatar=moving.current;
     const hero=wrapper?.closest('.hero');
     const heading=hero?.querySelector('h1');
-    if(!wrapper||!avatar||!hero||!heading||reduced)return;
+    if(!wrapper||!avatar||!hero||!heading||reduced||!window.matchMedia('(hover: hover) and (pointer: fine)').matches)return;
     const position={x:0,y:0};
     let active=false, minY=0, originY=0;
     let pointer: {clientX:number,clientY:number}|null=null;
@@ -53,9 +55,9 @@ function Magnet({children,onMove}:{children:React.ReactNode,onMove?:(position:Ma
     window.addEventListener('mousemove',move);window.addEventListener('resize',resize);window.addEventListener('blur',reset);document.documentElement.addEventListener('mouseleave',reset);
     return()=>{observer.disconnect();window.removeEventListener('mousemove',move);window.removeEventListener('resize',resize);window.removeEventListener('blur',reset);document.documentElement.removeEventListener('mouseleave',reset);gsap.killTweensOf(position);gsap.set(avatar,{clearProps:'transform'});};
   },[reduced,onMove]);
-  return <div ref={ref}><div ref={moving} style={{willChange:'transform'}}>{children}</div></div>;
+  return <div ref={ref} className="avatar-interaction"><div ref={moving} style={{willChange:'transform'}}>{children}</div>{status==='permission'&&<button className="avatar-motion-control" type="button" onClick={enableMotion}>Enable Motion</button>}{(status==='denied'||status==='unavailable')&&<p className="avatar-motion-hint" role="status">{status==='denied'?'Motion access denied. Drag the avatar to move it.':'Drag the avatar to move it.'}</p>}</div>;
 }
-function Hero(){const [shadow,setShadow]=useState<MagnetPosition>({x:0,y:0,active:false});return <section className="hero"><FadeIn y={-20}><nav>{['About','Expertise','Projects','Contact'].map((n,i)=><a key={n} href={['#about','#services','#projects','#contact'][i]}>{n}</a>)}</nav></FadeIn><div className="heading-wrap"><FadeIn delay={.15} y={40}><h1 className="hero-heading">Hi, I'm Saurabh</h1><h3 className="hero-subtitle">A Product Designer</h3></FadeIn></div><div className="hero-bottom"><FadeIn delay={.35} y={20}><p className="hero-intro">A PRODUCT DESIGNER CRAFTING<br/>INTUITIVE EXPERIENCES AT<br/>THE INTERSECTION OF UX &amp; AI.</p></FadeIn><FadeIn delay={.5} y={20}><a className="contact-button" href="#projects">Explore my work</a></FadeIn></div><div className="hero-floor-shadow" aria-hidden="true" style={{transform:`translateX(calc(-50% + ${shadow.x}px)) scale(${Math.max(.35,1+shadow.y/900)})`,opacity:Math.max(.35,Math.min(1,.7+shadow.y/300))}}/><div className="portrait"><FadeIn delay={.6}><Magnet onMove={setShadow}><img src="/my_avatar_meditating.png" alt="Your meditating 3D avatar" fetchPriority="high"/></Magnet></FadeIn></div></section>}
+function Hero(){const [shadow,setShadow]=useState<MagnetPosition>({x:0,y:0,active:false});const shadowRef=useRef<HTMLDivElement>(null);return <section className="hero"><FadeIn y={-20}><nav>{['About','Expertise','Projects','Contact'].map((n,i)=><a key={n} href={['#about','#services','#projects','#contact'][i]}>{n}</a>)}</nav></FadeIn><div className="heading-wrap"><FadeIn delay={.15} y={40}><h1 className="hero-heading">Hi, I'm Saurabh</h1><h3 className="hero-subtitle">A Product Designer</h3></FadeIn></div><div className="hero-bottom"><FadeIn delay={.35} y={20}><p className="hero-intro">A PRODUCT DESIGNER CRAFTING<br/>INTUITIVE EXPERIENCES AT<br/>THE INTERSECTION OF UX &amp; AI.</p></FadeIn><FadeIn delay={.5} y={20}><a className="contact-button" href="#projects">Explore my work</a></FadeIn></div><div ref={shadowRef} className="hero-floor-shadow" aria-hidden="true" style={{transform:`translateX(calc(-50% + ${shadow.x}px)) scale(${Math.max(.35,1+shadow.y/900)})`,opacity:Math.max(.35,Math.min(1,.7+shadow.y/300))}}/><div className="portrait"><FadeIn delay={.6}><Magnet onMove={setShadow} shadowRef={shadowRef}><img src="/my_avatar_meditating.png" alt="Your meditating 3D avatar" fetchPriority="high"/></Magnet></FadeIn></div></section>}
 function Marquee(){const ref=useRef<HTMLElement>(null);const {scrollY}=useScroll();const [top,setTop]=useState(0);useEffect(()=>{const measure=()=>setTop((ref.current?.getBoundingClientRect().top||0)+window.scrollY-window.innerHeight);measure();window.addEventListener('resize',measure);return()=>window.removeEventListener('resize',measure)},[]);const right=useTransform(scrollY,y=>(y-top)*.3-650);const left=useTransform(scrollY,y=>-((y-top)*.3)-200);return <section ref={ref} className="marquee" aria-label="Motion design inspiration">{[assets.marquee.slice(0,11),assets.marquee.slice(11)].map((row,i)=><motion.div className="marquee-row" key={i} style={{x:i?left:right,willChange:'transform'}}>{[...row,...row,...row].map((src,j)=><img key={j} src={src} alt="Motion design showcase" loading="lazy"/>)}</motion.div>)}</section>}
 const about="With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!";
 function Char({char,index,total,progress}:{char:string,index:number,total:number,progress:MotionValue<number>}){const opacity=useTransform(progress,[index/total,(index+1)/total],[.2,1]);return <motion.span style={{opacity}}>{char}</motion.span>}
