@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.npmrc
+credentials.*
+secrets.*
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+.openai/hosting.json
+public/jira-worklog-placeholder.jpg
+public/my_avatar.png
