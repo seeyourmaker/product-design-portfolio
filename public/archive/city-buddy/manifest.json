@@ -1,0 +1,59 @@
+{
+  "source": "https://gamma.app/public/City-Buddy-kg0sz6eck3izjrx",
+  "files": [
+    {
+      "path": "/archive/city-buddy/01.png",
+      "source": "https://cdn.gamma.app/qksi4pjnkqzw5i5/99710e9018ba4dfb964b035ad1beed7f/optimized/Cover.png",
+      "bytes": 155255,
+      "name": "Cover.png"
+    },
+    {
+      "path": "/archive/city-buddy/02.png",
+      "source": "https://cdn.gamma.app/qksi4pjnkqzw5i5/1d4029b7498e4f65b9445aa439bc289c/optimized/Problem-solving-pana.png",
+      "bytes": 129896,
+      "name": "Problem-solving-pana.png"
+    },
+    {
+      "path": "/archive/city-buddy/03.png",
+      "source": "https://cdn.gamma.app/qksi4pjnkqzw5i5/9a64f4fd49004ed68d229bcb5dce5d07/optimized/Screenshot-2023-03-06-at-2.28.30-PM.png",
+      "bytes": 249968,
+      "name": "Screenshot-2023-03-06-at-2.28.30-PM.png"
+    },
+    {
+      "path": "/archive/city-buddy/04.png",
+      "source": "https://cdn.gamma.app/qksi4pjnkqzw5i5/c7ebb7a2bc724ea897e6cb36cd560c37/optimized/Screenshot-2023-03-06-at-2.29.06-PM.png",
+      "bytes": 655425,
+      "name": "Screenshot-2023-03-06-at-2.29.06-PM.png"
+    },
+    {
+      "path": "/archive/city-buddy/05.svg",
+      "source": "https://cdn.gamma.app/qksi4pjnkqzw5i5/e937e745eee54b37a3249efbcad737ae/optimized/chart-scatter-bubble.svg",
+      "bytes": 988,
+      "name": "chart-scatter-bubble.svg"
+    },
+    {
+      "path": "/archive/city-buddy/06.svg",
+      "source": "https://cdn.gamma.app/qksi4pjnkqzw5i5/ab9cd0fb48314b3aa882a486319372e5/optimized/chart-tree-map.svg",
+      "bytes": 1248,
+      "name": "chart-tree-map.svg"
+    },
+    {
+      "path": "/archive/city-buddy/07.svg",
+      "source": "https://cdn.gamma.app/qksi4pjnkqzw5i5/66647910c3454843b305a9773a45f87c/optimized/magnifying-glass-chart.svg",
+      "bytes": 752,
+      "name": "magnifying-glass-chart.svg"
+    },
+    {
+      "path": "/archive/city-buddy/08.svg",
+      "source": "https://cdn.gamma.app/qksi4pjnkqzw5i5/9b614346d8634fc2ac9b67f4729441dd/optimized/arrows-spin.svg",
+      "bytes": 1294,
+      "name": "arrows-spin.svg"
+    },
+    {
+      "path": "/archive/city-buddy/09.jpg",
+      "source": "https://cdn.gamma.app/qksi4pjnkqzw5i5/569b3e6284eb466cb4b525c6e8592aa0/optimized/DP3---User-Journey-Map.jpg",
+      "bytes": 300823,
+      "name": "DP3---User-Journey-Map.jpg"
+    }
+  ]
+}

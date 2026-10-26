@@ -1,0 +1,7 @@
+# Full-size image viewer — 24 October 2026
+
+The project screenshots in ADAPT Icon Finder, the JiraBro full case study, and JiraBro Quick Look previously linked straight to PNG files in a new tab. Ordinary clicks now open an in-page native dialog. The toolbar has **Back to project**, **Close**, and an actual-size toggle. Escape, backdrop click, and browser Back close the viewer. The opening link regains focus and its page or slide scroll position is restored. Browser Forward reopens the image history entry. Image links retain their original `href` as a normal fallback.
+
+The shared viewer is implemented in `src/ImageViewer.tsx` and `src/ImageViewer.css`. The source links are marked `data-image-viewer` in the three project components. External MotionSites marquee links are outside this local image flow.
+
+Verification: `npm run build` passed. Headless Chrome at 1440px and 390px opened every ADAPT capture and each full-case-study capture, checked image loading, the close button, Escape, browser Back, the toolbar Back control, actual-size toggle, source URL, and focus/scroll restoration. JiraBro Quick Look slides 01, 04, 06, and 07 were checked at 1024px, including both Slide 04 screenshots, scroll restoration, browser Back, and Forward. Backdrop click was checked at 1440px; the 390px viewer was visually inspected. No page errors were reported. Existing non-fatal Framer Motion bundler warnings remain.

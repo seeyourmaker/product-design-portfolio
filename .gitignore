@@ -15,3 +15,8 @@ Desktop.ini
 .openai/hosting.json
 public/jira-worklog-placeholder.jpg
 public/my_avatar.png
+# Supplied internal ADAPT screenshots: local portfolio preview only.
+public/adapt/
+
+# Owner-supplied BMC research and product captures: local preview assets.
+public/intent/full/
