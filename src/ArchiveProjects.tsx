@@ -4,6 +4,8 @@ import {gsap} from 'gsap';
 import {featuredProjects} from './data/projects';
 import {JiraCover} from './JiraThumbnails';
 import {AdaptLibraryThumbnail} from './AdaptThumbnails';
+import {LocalGigsCover} from './LocalGigsCaseStudy';
+import {CatalogInteractionThumbnail} from './CatalogThumbnails';
 import {archiveProjects,archiveProjectBySlug,type ArchiveProject} from './data/archiveProjects';
 import archiveMedia from './data/archiveMedia.json';
 import './AdaptIconFinder.css';
@@ -21,7 +23,7 @@ const isImage=(path:string)=>/\.(png|jpe?g|gif|webp|svg)$/i.test(path);
 function useArchiveReveal(root:React.RefObject<HTMLElement>,title:string){
   useEffect(()=>{
     const previous=document.title;
-    document.title=`${title} — Saurabh`;
+    document.title=`${title} | Saurabh`;
     window.scrollTo({top:0,behavior:'instant'});
     const media=gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)',()=>{
@@ -65,7 +67,7 @@ export function ArchiveProjectPage({slug}:{slug:string}){
       </header>
       {project.chapters.map((chapter,index)=><section className="adapt-itch adapt-reveal archive-chapter" id={index===0?'archive-story':undefined} tabIndex={index===0?-1:undefined} key={chapter.label}>
         <div className="adapt-section-heading"><span className="adapt-eyebrow">{chapter.label}</span><h2>{chapter.title}</h2><p>{chapter.copy}</p></div>
-        <div className={`archive-story-media${chapter.images.length===1?' archive-story-media--single':''}`}>{chapter.images.map((mediaIndex,i)=><ArchiveAsset key={mediaIndex+'-'+i} src={files[mediaIndex]} alt={`${chapter.caption||project.title} — image ${i+1}`} caption={i===0?chapter.caption:undefined}/>)}</div>
+        <div className={`archive-story-media${chapter.images.length===1?' archive-story-media--single':''}`}>{chapter.images.map((mediaIndex,i)=><ArchiveAsset key={mediaIndex+'-'+i} src={files[mediaIndex]} alt={`${chapter.caption||project.title} | image ${i+1}`} caption={i===0?chapter.caption:undefined}/>)}</div>
       </section>)}
       <section className="archive-originals adapt-reveal" aria-labelledby="archive-originals-heading"><div className="adapt-section-heading"><span className="adapt-eyebrow">ORIGINAL MATERIAL</span><h2 id="archive-originals-heading">The complete visual archive.</h2><p>All available project media was saved locally from the published source. Open any image at its original saved size.</p></div>
         <details><summary>View all {files.length} original assets <span aria-hidden="true">↓</span></summary><div className="archive-all-media">{files.map((src,index)=><ArchiveAsset key={src} src={src} alt={`${project.title}: archived original asset ${index+1}`} caption={`Original asset ${String(index+1).padStart(2,'0')}`}/>)}</div></details>
@@ -90,16 +92,19 @@ function IntentDecisionCover(){return <div className="archive-card-image archive
 </div></div>}
 
 function FeaturedCover({slug,label}:{slug:string;label:string}){
+  if(slug==='local-gigs')return <div className="archive-card-image archive-featured-cover archive-featured-cover--gigs"><LocalGigsCover/></div>;
   if(slug==='intent-identification')return <IntentDecisionCover/>;
+  if(slug==='redesigning-chat-experience')return <div className="archive-card-image archive-featured-cover archive-featured-cover--catalog" role="img" aria-label="A chat preview with workflow choices, curated lists, and shortcuts."><span className="archive-intent-kicker">CLICKS SAY MORE THAN WORDS</span><CatalogInteractionThumbnail showHeading={false}/><span className="archive-intent-note">Components and shortcuts, right in the conversation.</span></div>;
   if(slug==='adapt-icon-finder')return <div className="archive-card-image archive-featured-cover archive-featured-cover--adapt" aria-hidden="true"><AdaptLibraryThumbnail/></div>;
   if(slug==='jira-worklog-assistant')return <div className="archive-card-image archive-featured-cover archive-featured-cover--jira" aria-hidden="true"><JiraCover/></div>;
   return <div className="archive-card-image"><span>{label}</span></div>;
 }
 const flagshipDestinations:Record<string,{href:string;label:string}>={
   'intent-identification':{href:'/projects/intent-identification',label:'Read case study'},
-  'catalog-curator-revamp':{href:'/#projects',label:'View featured preview'},
+  'redesigning-chat-experience':{href:'/projects/redesigning-chat-experience',label:'Read case study'},
   'jira-worklog-assistant':{href:'/projects/jira-worklog-assistant',label:'Explore project'},
   'adapt-icon-finder':{href:'/projects/adapt-icon-finder',label:'Explore project'},
+  'local-gigs':{href:'/projects/local-gigs',label:'Read case study'},
 };
 
 export function ArchiveListing(){
@@ -110,10 +115,10 @@ export function ArchiveListing(){
     <nav className="adapt-nav" aria-label="Project navigation"><a href="/"><ArrowLeft size={16} aria-hidden="true"/> Portfolio home</a><span>PROJECTS / SAURABH</span><a href="#archive-projects">Browse archive ↓</a></nav>
     <div className="adapt-shell">
       <header className="archive-listing-hero"><p className="adapt-eyebrow">SELECTED WORK + EARLIER ARCHIVE</p><h1>Projects<span>.</span></h1><p>Product design, systems, interfaces, and identities. The featured work leads; the earlier portfolio follows.</p></header>
-      <section id="archive-projects" className="archive-listing-section"><div className="adapt-section-heading"><span className="adapt-eyebrow">01 / FEATURED</span><h2>Recent work.</h2><p>Four flagship projects from the current portfolio.</p></div><div className="archive-card-grid">{featuredProjects.map((project,index)=><article className="archive-card adapt-reveal" key={project.slug}>
-        <a href={flagshipDestinations[project.slug].href} aria-label={`${flagshipDestinations[project.slug].label}: ${project.title}`}><FeaturedCover slug={project.slug} label={project.thumbnail.label}/><div className="archive-card-info"><span>0{index+1} / {project.category}</span><h3>{project.title}</h3><p>{project.description}</p><strong>{flagshipDestinations[project.slug].label} <ArrowUpRight size={15} aria-hidden="true"/></strong></div></a>
+      <section id="archive-projects" className="archive-listing-section"><div className="adapt-section-heading"><span className="adapt-eyebrow">01 / FEATURED</span><h2>Recent work.</h2></div><div className="archive-card-grid">{featuredProjects.map((project,index)=><article className="archive-card archive-card--featured adapt-reveal" key={project.slug}>
+        <a className="archive-card-cover-link" href={flagshipDestinations[project.slug].href} aria-label={`Open ${project.title}`}><FeaturedCover slug={project.slug} label={project.thumbnail.label}/></a><div className="archive-card-info"><span>0{index+1} / {project.category}</span><h3>{project.title}</h3><p>{project.description}</p><div className="archive-card-actions">{project.slug==='adapt-icon-finder'||project.slug==='local-gigs'?<a href={flagshipDestinations[project.slug].href}>{project.slug==='local-gigs'?'Case study':'View project'} <ArrowUpRight size={15} aria-hidden="true"/></a>:<><a href={`/projects/${project.slug}/quick-look`}>Quick Look <ArrowUpRight size={15} aria-hidden="true"/></a><a href={flagshipDestinations[project.slug].href}>Case study <ArrowUpRight size={15} aria-hidden="true"/></a></>}</div></div>
       </article>)}</div></section>
-      <section className="archive-listing-section"><div className="adapt-section-heading"><span className="adapt-eyebrow">02 / MIGRATED ARCHIVE</span><h2>Earlier work.</h2><p>Stories and original assets carried over from the previous portfolio.</p></div><div className="archive-card-grid">{archiveProjects.map((project,index)=><article className="archive-card adapt-reveal" key={project.slug}><a href={`/projects/${project.slug}`} aria-label={`Open ${project.title}`}><div className="archive-card-image"><img src={mediaFor(project.slug)[project.hero]} alt="" loading="lazy"/></div><div className="archive-card-info"><span>{String(index+1).padStart(2,'0')} / {project.category} · {project.year}</span><h3>{project.title}</h3><p>{project.lead}</p><strong>Explore project <ArrowUpRight size={15} aria-hidden="true"/></strong></div></a></article>)}</div></section>
+      <section className="archive-listing-section"><div className="adapt-section-heading"><span className="adapt-eyebrow">02 / OLD WORK</span><h2>Earlier work.</h2></div><div className="archive-card-grid">{archiveProjects.map((project,index)=><article className="archive-card adapt-reveal" key={project.slug}><a href={`/projects/${project.slug}`} aria-label={`Open ${project.title}`}><div className={`archive-card-image archive-card-image--${project.slug}`}><img src={project.slug==='smart-watch-strap'?'/archive/smart-watch-strap/concept-thumbnail.png':project.slug==='avaviya-reading'?'/archive/avaviya-reading/thumbnail.jpg':mediaFor(project.slug)[project.hero]} alt="" loading="lazy"/></div><div className="archive-card-info"><span>{String(index+1).padStart(2,'0')} / {project.category} · {project.year}</span><h3>{project.title}</h3><p>{project.lead}</p><strong>Explore project <ArrowUpRight size={15} aria-hidden="true"/></strong></div></a></article>)}</div></section>
       <footer className="adapt-footer"><p>Every project starts somewhere.<br/><em>Keep exploring.</em></p><div><a href="/"><ArrowLeft size={16} aria-hidden="true"/> Portfolio home</a><a href="#archive-top">Back to top ↑</a></div></footer>
     </div>
   </main>;

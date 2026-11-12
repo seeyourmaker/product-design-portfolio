@@ -5,7 +5,7 @@ export interface FeaturedProject {
   description: string
   navigationTarget: string
   thumbnail: {
-    variant: 'catalog' | 'intent' | 'worklog' | 'icons'
+    variant: 'catalog' | 'intent' | 'worklog' | 'icons' | 'gigs'
     label: string
   }
 }
@@ -20,11 +20,11 @@ export const featuredProjects: FeaturedProject[] = [
     thumbnail: { variant: 'intent', label: 'Intent Identification' },
   },
   {
-    slug: 'catalog-curator-revamp',
-    title: 'You cant always chat',
+    slug: 'redesigning-chat-experience',
+    title: 'You can’t always chat',
     category: 'Design · Re-imagining interaction',
-    description: 'Changing the way we chat with AI assistants',
-    navigationTarget: '/projects/catalog-curator-revamp',
+    description: 'Making AI conversations easier through structured choices, contextual components, and shortcuts.',
+    navigationTarget: '/projects/redesigning-chat-experience',
     thumbnail: { variant: 'catalog', label: 'Ease up the experience!' },
   },
   {
@@ -42,5 +42,13 @@ export const featuredProjects: FeaturedProject[] = [
     description: 'Find and reuse ADAPT icons without leaving Figma. A small internal plugin built with AI assistance.',
     navigationTarget: '/projects/adapt-icon-finder',
     thumbnail: { variant: 'icons', label: 'ADAPT ICON FINDER' },
+  },
+  {
+    slug: 'local-gigs',
+    title: 'Local Gigs',
+    category: 'Independent music · Ticketing',
+    description: 'A mobile-first gig discovery and booking concept built around independent artists, small venues, and direct UPI checkout.',
+    navigationTarget: '/projects/local-gigs',
+    thumbnail: { variant: 'gigs', label: 'LOCAL GIGS' },
   },
 ]

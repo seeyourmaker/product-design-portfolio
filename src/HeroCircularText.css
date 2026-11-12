@@ -1,0 +1,7 @@
+.hero-circular-text{position:absolute;left:50%;top:20%;z-index:-1;width:clamp(560px,100vw,1800px);height:clamp(560px,100vw,1800px);overflow:visible;transform:translate(-50%,-50%);pointer-events:none;user-select:none}
+.hero-circular-text text{fill:rgb(215 226 234 / 2%);font-family:'Kanit',sans-serif;font-size:36px;font-weight:600;letter-spacing:0}
+.hero-circular-ring{transform-box:view-box;transform-origin:center;animation:hero-circular-rotation linear infinite;will-change:transform;backface-visibility:hidden}
+.hero-circular-ring--reverse{animation-direction:reverse}
+@keyframes hero-circular-rotation{to{transform:rotate(360deg)}}
+@media(max-width:639px){.hero-circular-text{top:21%}}
+@media(prefers-reduced-motion:reduce){.hero-circular-ring{animation:none}}

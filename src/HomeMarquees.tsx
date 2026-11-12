@@ -228,10 +228,9 @@ function MarqueeRow({kind,reduced}:RowProps) {
   </div>;
 }
 
-export function HomeMarquees(){
+export function HomeMarquees({kind='tools'}:{kind?:RowKind}){
   const reduced=useReducedMotion()===true;
-  return <section className="marquee home-marquees" aria-label="Tools and testimonials">
-    <MarqueeRow kind="tools" reduced={reduced}/>
-    <MarqueeRow kind="testimonials" reduced={reduced}/>
+  return <section className="marquee home-marquees" aria-label={kind==='tools'?'Tools':'Testimonials'}>
+    <MarqueeRow kind={kind} reduced={reduced}/>
   </section>;
 }

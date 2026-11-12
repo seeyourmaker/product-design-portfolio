@@ -59,6 +59,35 @@
 .archive-intent-flow{width:100%;height:100%;padding:26px 24px 22px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;color:#d7e2ea}
 .archive-intent-kicker,.archive-intent-note{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#cf75ff}
 .archive-intent-note{color:#aa96b7;letter-spacing:.04em;text-transform:none}
+.archive-featured-cover--catalog{flex-direction:column;align-items:stretch;justify-content:space-between;gap:12px;padding:26px 24px 22px;background:radial-gradient(ellipse at 78% 74%,#87b5ea38,transparent 64%),linear-gradient(155deg,#181818,#252525)}
+.archive-featured-cover--catalog>span{font-size:10px;text-align:left}
+.archive-featured-cover--catalog .archive-intent-kicker{color:#87b5ea}
+.archive-featured-cover--catalog .archive-intent-note{color:#aebbc8}
+.archive-featured-cover--catalog img{width:auto;height:auto;max-width:100%;object-fit:contain}
+.archive-featured-cover--catalog>.catalog-thumbnail{flex:1;width:100%;height:auto;min-height:0;padding:0;border-radius:0;background:none;overflow:hidden;container-type:inline-size}
+.archive-featured-cover--catalog .catalog-demo-layout{grid-template-columns:minmax(0,1.43fr) minmax(0,1fr);gap:20px;height:100%}
+.archive-featured-cover--catalog .catalog-demo-chat,.archive-featured-cover--catalog .catalog-demo-components{min-height:0}
+.archive-featured-cover--catalog .catalog-demo-time{font-size:9px}
+.archive-featured-cover--catalog .catalog-demo-bubble{gap:5px;padding:8px;border-radius:0 12px 12px 12px;font-size:clamp(8px,1.6cqw,11px)}
+.archive-featured-cover--catalog .catalog-demo-choice{gap:5px}
+.archive-featured-cover--catalog .catalog-demo-choice>img,.archive-featured-cover--catalog .catalog-demo-option>img{max-width:15px;max-height:15px}
+.archive-featured-cover--catalog .catalog-demo-select{height:27px;padding:0 7px;font-size:clamp(7px,1.4cqw,10px)}
+.archive-featured-cover--catalog .catalog-demo-submit{padding:3px 8px;font-size:9px}
+.archive-featured-cover--catalog .catalog-demo-limit{font-size:9px}
+.archive-featured-cover--catalog .catalog-feedback{height:18px;transform:scale(.75);transform-origin:left top}
+.archive-featured-cover--catalog .catalog-demo-components{gap:4px;font-size:clamp(8px,1.6cqw,11px)}
+.archive-featured-cover--catalog .catalog-demo-components h5{font-size:clamp(10px,2cqw,13px)}
+.archive-featured-cover--catalog .catalog-demo-option{min-height:16px}
+.archive-featured-cover--catalog .catalog-demo-checkbox{width:13px;height:13px}
+.archive-featured-cover--catalog .catalog-demo-menu-toggle{min-height:27px;padding:3px 7px}
+.archive-featured-cover--catalog .catalog-demo-menu-panel{margin-top:5px}
+.archive-featured-cover--catalog .catalog-demo-menu-search{min-height:28px}
+.archive-featured-cover--catalog .catalog-demo-menu-search img{max-width:18px;max-height:18px}
+.archive-featured-cover--catalog .catalog-demo-menu-options span{padding:3px 8px}
+.archive-featured-cover--catalog .catalog-demo-shortcuts{padding-top:3px}
+.archive-featured-cover--catalog .catalog-demo-shortcuts h5{margin-bottom:2px}
+.archive-featured-cover--catalog .catalog-demo-shortcuts p{font-size:clamp(8px,1.6cqw,11px);line-height:1.3}
+.archive-featured-cover--catalog .catalog-demo-shortcuts p+p{margin-top:1px}
 .archive-intent-stages{display:grid;grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr) 20px minmax(0,1.2fr) 20px minmax(0,.8fr);align-items:center;gap:2px;min-height:0;flex:1}
 .archive-intent-stage{display:flex;min-width:0;min-height:106px;flex-direction:column;justify-content:center;align-items:flex-start;gap:7px;padding:13px 10px;border:1px solid #7f668f80;border-radius:11px;background:#19141f}
 .archive-intent-stage>svg{color:#bd8dd7;flex:none}.archive-intent-stage>span{font-size:clamp(11px,2.5cqw,15px);line-height:1.15;font-weight:500}.archive-intent-stage>small{font-size:clamp(8px,1.8cqw,10px);line-height:1.3;color:#aa96b7}
@@ -87,6 +116,7 @@
 }
 @media(max-width:767px){
   .archive-featured-cover--intent{height:330px}
+  .archive-featured-cover--catalog{height:330px;padding:18px 20px 16px}
   .archive-intent-flow{padding:18px 20px 16px}
   .archive-intent-stages{grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr);grid-template-rows:minmax(0,1fr) 16px minmax(0,1fr);gap:0}
   .archive-intent-stage{min-height:0;height:100%;padding:12px;gap:5px}
@@ -104,3 +134,26 @@
 .archive-featured-cover .adapt-thumbnail--source{gap:12px}
 .archive-featured-cover .adapt-thumbnail--source h4{font-size:clamp(22px,6cqw,30px)}
 .archive-featured-cover .adapt-icon-constellation{width:100%}
+.archive-card--featured .archive-card-cover-link{display:block;height:auto}
+.archive-card--featured .archive-card-info{display:flex;flex-direction:column;min-height:190px}
+.archive-card-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:20px}
+.archive-card-actions a{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border:1px solid var(--adapt-rule);border-radius:99px;color:#d7e2ea;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.archive-card-actions a:hover,.archive-card-actions a:focus-visible{border-color:var(--adapt-accent);color:var(--adapt-accent)}
+.archive-card-image--onverity-design-system img,.archive-card-image--city-buddy img,.archive-card-image--logofolio img{object-fit:cover}
+.archive-card-image--accessible-mobile-cover{background:#fff}
+.archive-card-image--accessible-mobile-cover img{object-fit:contain}
+.archive-card-image--bookie{background:#ca1c8c;justify-content:flex-end}
+.archive-card-image--bookie img{width:auto;max-width:90%;object-fit:contain;object-position:right center}
+.archive-card-image--you-fashion{background:#f2ce12}
+.archive-card-image--avaviya-reading,.archive-card-image--al-forno{background:#000000}
+.archive-card-image--dominar-app{background:radial-gradient(circle at 70% 40%,#4e2924,#151719 62%)}
+.archive-card-image--get-going{background:radial-gradient(circle at 65% 40%,#d8eb42,#67c543 70%)}
+.archive-card-image--skye-smartwatch{background:radial-gradient(circle at 55% 48%,#3c4d69,#0b0d14 70%)}
+
+/* These photographic covers fill the card media area; other archive treatments keep their framing. */
+.archive-card-image--farmer-logistics,.archive-card-image--onverity-design-system{padding:0}
+.archive-card-image--farmer-logistics img,.archive-card-image--onverity-design-system img{object-fit:cover}
+
+/* Additional archive covers use the same edge-to-edge treatment. */
+.archive-card-image--smart-watch-strap,.archive-card-image--city-buddy,.archive-card-image--logofolio{padding:0}
+.archive-card-image--smart-watch-strap img,.archive-card-image--city-buddy img,.archive-card-image--logofolio img{object-fit:cover}

@@ -1,8 +1,48 @@
 # Project Status
 
+## 12 November 2026 final content decisions
+
+- Contact me, the header Contact item, and the footer contact action open https://www.linkedin.com/in/saurabhhaldankar/. The email contact form is not part of the site. Navigation labels stay About, Expertise, Projects, and Contact.
+- Redesigning Chat Experience keeps `/projects/redesigning-chat-experience` and `/projects/redesigning-chat-experience/quick-look`, built from the existing redesign narrative and captures. Visits to `/projects/catalog-curator-revamp` resolve to those routes.
+- Intent Identification keeps its existing role copy, final-UI placeholders, and the qualified ~60,000 to ~20,000 initial-prompt development-testing claim. No timeframe, extra ownership statement, or new evidence section was added.
+- ADAPT Icon Finder again shows the Cursor and Figma Agent screenshot placeholders. JiraBro keeps the implemented, locally tested Teams status with publication in progress, and the interactive sandbox note.
+- Testimonial cards are unchanged. Sentence-punctuation em dashes and en dashes are removed from visible copy. Hyphens and range marks such as 2–3 and 80k–100k remain.
+
+## 12 November 2026 Redesigning Chat Experience case study
+
+- The Task section now pairs its copy with a two-step diagram made from cropped excerpts of the earlier guest parking service response. The callouts identify the expanded tables near the start and the cost, fulfillment issue, and action near the end. Each excerpt opens its original full screenshot. Desktop and 400px layouts were visually checked; `npm run build` passes.
+- The case-study text layout now uses one consistent left edge for section labels, headings, paragraphs, screenshots, and captions. This overrides the portfolio's global centered `h2` rule and replaces the split heading/paragraph layout with a narrower reading column, informed by the restrained alignment on harrilin.co. The revised desktop and 400px layouts were visually checked; `npm run build` passes.
+- Added the final service-preview frame after the published Guest Parking Service card, showing the Service Configuration view opened from Preview. The page accents now use the same `#87b5ea` blue as this project's homepage thumbnail.
+- `/projects/redesigning-chat-experience` now presents the shipped redesign as a visual case study: earlier product captures, final Figma frames, and a direct comparison of the guest parking service draft. It identifies the owner's role as product designer and redesign lead on a three-designer team. It makes no unverified performance or research claims.
+- `/projects/redesigning-chat-experience/quick-look` now plays an approximately 30-second silent, looping GSAP film that moves from the earlier guest parking service response through approval, grouped review, publication, and service preview. It includes pause/play, keyboard replay, a reduced-motion still, and a debug scrub slider. The style brief and rundown are in `docs/redesign-chat-quick-look-film.md`. The earlier bridge-page status recorded below has been superseded.
+- Local image assets and their provenance are recorded in `docs/redesign-chat-case-study-evidence.md`.
+- `npm run build` passes. Desktop and 400px browser layouts were inspected, the full-size image viewer opened, and the Quick Look route linked back to the case study.
+
+## 10 November 2026 Local Gigs thumbnail update
+
+- The shared homepage featured card now has three code-built Local Gigs thumbnails: a homegrown gig poster, an artist-first direct-booking and commission-reduction concept, and a mobile event-discovery view. The ticket graphic labels fewer platform cuts as an aim and the absence of a booking fee as specific to the current demo. The existing archive cover and case-study visuals remain in place.
+- The featured card was aligned with Figma node `215:446`: “SUPPORT THE SCENE. FEEL THE MUSIC.” headline, +1px tracking on the three large text blocks, the measured asterisk and poster-ring placements, and the supplied 17 × 17 case-study arrow SVG.
+- Desktop and narrow-screen layouts were visually inspected in the local browser. `npm run build` passes.
+
+## 6 November 2026 Local Gigs update
+
+- Local Gigs is the fifth and last Recent Work item on `/projects` and appears last in the shared homepage featured-project stack. Its code-built cover uses the project's own fictional Afterglow visual language. The new `/projects/local-gigs` case study covers the independent-music ticketing ambition, event discovery, responsive design, and the open-source YouPI-PG UPI integration. The project has no Quick Look route or link yet.
+- The case study distinguishes the implemented local ₹1 UPI test flow from the private published demo and from a public ticketing service. It does not claim real event inventory or admission tickets. The displayed desktop/mobile scenes are representative recreations of the interface.
+- `npm run build` passes. The case-study route was visually inspected in the local browser, and the Projects page was checked for final Recent Work placement and link destination. A narrow-viewport browser inspection remains pending; responsive CSS is included.
+- Older counts of four featured projects below are historical.
+
+## 27 October 2026 content-audit update
+
+- The owner-supplied LinkedIn profile is connected to the About contact action and footer. The `Redesigning Chat Experience` project has direct Quick Look and case-study routes; both are clearly labeled concept pages until the owner supplies the full project narrative and outcomes.
+- Intent Identification now links from Quick Look to its full case study, shows the supplied Aug–Sep 2026 / four-week timeframe, has a visible mobile decision summary, and omits empty final-production UI slots while the final UI is being prepared. The approximately 67% initial-prompt token observation remains scoped to engineering development testing.
+- The Projects listing uses reader-facing section labels, links each featured project to its available pages, omits UDENT and Facebook Dark Theme, and updates specified archive covers and backgrounds. The Smart Watch with LED Strap listing uses the owner's selected generated concept cover; original presentation media remains on the project page.
+- The ADAPT evidence slots and JiraBro sandbox teaser are removed. The ADAPT Figma mark no longer restarts a hover animation; the hero rings use alpha fill and a stable transform layer to reduce flicker. Production build passes. Follow-up inputs and visual checks are tracked in `docs/content-audit-unfixed-2026-10-27.md`.
+- The Projects listing card-cover link no longer expands to the full card height; this restores the title, description, and actions beneath each featured thumbnail. Verified in the local browser and production build.
+- This update supersedes older statements below about the Catalog route, disabled Intent CTA, empty final-UI frames, contact placeholder, ADAPT evidence slots, and Jira sandbox teaser. The historical notes remain for implementation context.
+
 ## Implemented
 
-- Catalog Curator Revamp homepage card now uses Figma frame `75:1256` from `eXrlwvwMuV81QRtwNzEqa3`: “You cant always chat,” the prompt-engineer message, token-value publication response, and “Clicks say more than words” panel. Uses the frame's six local SVG assets and a `#87B5EA` blue accent between the neighboring purple and teal cards. The frame's right-side temporary-thumbnail label is retained. Checked at 1440, 1102, 768, 390, and 320px with no page overflow or browser errors; all imported assets load. Existing project navigation remains in place.
+- Catalog Curator Revamp homepage card follows Figma frame `75:1256` from `eXrlwvwMuV81QRtwNzEqa3`: “You cant always chat,” the prompt-engineer message, token-value publication response, and the two-column “Clicks say more than words” composition. Thumbnail controls are static, using local Figma SVG icons, the frame's `#87B5EA` blue accent, and the portfolio's Kanit font. Production build and desktop visual check pass; responsive CSS stacks the composition on narrow screens. The Case Study button currently opens a static concept preview; its final URL will be connected when supplied.
 
 - Intent Identification full editorial case study at `/projects/intent-identification` (also `/projects/intent-identification/full`, trailing slashes supported): ten sections from the supplied full brief, two interactive conceptual reconstructions in Section 06, three diagram-design SVG diagrams, original Before screenshot, FigJam research export, and PDF conversation excerpts. Workflow choices update the conversation and both configuration previews; keyboard-operable tabs progressively disclose Service Profile, Questionnaire, Workflow, and Fulfillment. Reuses the shared image viewer and scoped GSAP reveals. Customer release, development-only token results, and unverified Jev release details are distinguished. The existing homepage Case study URL now resolves; `/projects` links to the full page. Quick Look remains unchanged, including its existing disabled future-case-study CTA. Final conversation UI frames are still missing and have labeled placement areas. Source evidence and checks: `docs/intent-full-case-study-evidence.md`.
 
@@ -34,8 +74,8 @@
 - Service copy and external sample imagery remain prototype content, not approved portfolio case-study content.
 - The project manifest refers to third-party media with unverified usage rights. That manifest is sanitized for the repository; the original local file is left unchanged. Approved media must be supplied before restoring those references.
 - The local Jira placeholder is excluded from the repository pending asset clearance.
-- Lenis and React Router are not installed. Catalog Curator's full case study is still planned. Intent Identification now has a full case study; its existing homepage case-study link and the projects listing open it.
-- Contact details and live project links are placeholders. The current modal shows image previews rather than live projects.
+- Lenis and React Router are not installed. Redesigning Chat Experience has Quick Look and case-study routes. Intent Identification now has a full case study; its existing homepage case-study link and the projects listing open it.
+- Live project links in the preview dialog remain placeholders. The current modal shows image previews rather than live projects.
 - No test script or automated interaction test suite is configured. Quick Look browser validation is recorded in `docs/intent-quick-look-evidence.md`.
 - Quick Look public release still needs the approved Slide 02 After mockup and final conversation designs and owner verification of token methodology, Jev chronology, workflow-selection status, and retained deliverable claims (especially hallucination/cognitive-load reductions).
 
@@ -69,3 +109,23 @@ The current design and motion implementation remains the source to extend; plann
 
 ### Homepage navigation
 - The top “Projects” link now opens `/projects`; the separate “Explore my work” hero action still scrolls to featured work.
+### Intent Identification final UI demonstration
+- Added a self-contained, illustrative Catalog Curator walkthrough after the full case study reflection and before its footer. The timed sequence shows the supplied request, two focused clarifications, selected answers, and an editable draft preview. It pauses outside the viewport, supports replay, and settles on the complete view when reduced motion is preferred. This is a portfolio reconstruction, not a released product recording.
+
+
+- The final UI demonstration now uses the portfolio dark palette and Kanit throughout. Its composer clears after the request is sent, including the character count.
+- The final UI demonstration keeps animated content clipped to the chat area, centers the welcome group, and insets and left-aligns the composer.
+- Increased the final UI demonstration frame height so the request and complete response fit inside the clipped chat area at desktop and phone widths.
+- The final UI demonstration now has a manual Pause/Resume control beside Replay; the selected pause state persists when the demo leaves and re-enters the viewport.
+- The final UI demonstration chat area now explicitly centers its content alignment across viewport sizes.
+- Centered the welcome heading directly within its own container, matching the already centered description and Guide Me action without changing later assistant messages.
+
+### Repository review and performance pass — 12 November 2026
+
+- Reviewed routes, assets, dependency state, and commit readiness. Simplified route state, corrected hero heading semantics, removed stale preview text and a production Figma capture script, and split redesign, Intent, and Jira pages into route-loaded chunks.
+- Initial production JavaScript fell from 191.78 kB to 156.15 kB gzip; initial CSS fell from 44.60 kB to 20.88 kB gzip. The homepage avatar now uses a roughly 192 kB transparent WebP in place of a 1.2 MB PNG. The Intent video preloads metadata.
+- Build, whitespace check, offline production dependency audit, and Chrome route smoke checks passed. Clean-checkout media gaps and other remaining findings are recorded in `docs/portfolio-review-2026-11-12.md`.
+
+### Contact page — 12 November 2026
+
+- A `/contact` email form was added, then removed the same day. Contact actions open the LinkedIn profile instead. See the final content decisions above.

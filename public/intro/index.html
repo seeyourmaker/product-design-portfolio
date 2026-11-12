@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<!-- Adapted from Bang Motion starter-opener, MIT, Bang Tutorial.
+Approved: Clarity in motion · continuous typographic space · six beats · square + type.
+Typography: Kanit, from jack-portfolio/index.html. Portfolio source is unchanged.
+Palette: ink/ivory for cinematic contrast; chartreuse for the focus motif.
+One GSAP clock controls every animated pixel, including grain and directional blur.
+-->
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Saurabh H | Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<style>
+:root{--base:#0b0d10;--ink:#f2efe8;--accent:#d5ef78}
+*{box-sizing:border-box;margin:0}html,body{width:100%;height:100%;overflow:hidden;background:#0c0c0c;color:var(--ink);font-family:'Kanit',sans-serif}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;overflow:hidden;transform:translate(-50%,-50%);background:#0c0c0c}
+#light{position:absolute;width:2200px;height:1800px;left:-200px;top:-400px;background:radial-gradient(ellipse at center,#75834d0a,transparent 61%);pointer-events:none}
+#grain{position:absolute;inset:-64px;opacity:.022;pointer-events:none;z-index:4}
+#world{position:absolute;inset:0;transform-origin:960px 540px;will-change:transform}
+.type{position:absolute;line-height:.98;letter-spacing:-.045em;font-weight:500;white-space:nowrap}
+.char,.word{display:inline-block;position:relative}.word{transform-origin:50% 100%;transform-style:preserve-3d}
+.name{left:165px;top:355px;font-size:230px;font-weight:900;letter-spacing:-.045em}
+.role{position:absolute;left:180px;top:620px;font-size:44px;font-weight:400;letter-spacing:.01em;color:#b6beb5}
+#focus{left:190px;top:1670px;font-size:146px;perspective:1100px;line-height:1.05}
+#focus .first{display:block;font-size:100px;margin-bottom:22px;color:#b6beb5;font-weight:300}
+#focus .last{display:block}
+#focus .projects{display:block;margin-top:36px;font-size:36px;font-weight:300;letter-spacing:.01em;line-height:1.2;color:#b6beb5;clip-path:inset(0 100% 0 0)}
+#intent{left:230px;top:3160px;font-size:166px;line-height:1.02}
+#intent .line{display:block}
+#jira{left:650px;top:4600px;font-size:244px;font-weight:600}
+#catalog{left:190px;top:5945px;font-size:168px;line-height:1.03}
+#catalog .line{display:block}
+#end{top:7355px}
+#avatar{position:absolute;left:1550px;top:7790px;width:150px;height:auto;z-index:2;transform-origin:center center;filter:drop-shadow(0 24px 32px #0007)}
+#ui{display:none;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:min(680px,94vw);padding:12px 16px;background:#171c20ee;border:1px solid #4c5542;border-radius:12px;z-index:10;align-items:center;gap:12px;font-size:14px}
+#ui.on{display:flex}#ui button{background:#d5ef78;color:#0b0d10;border:0;padding:8px 12px;border-radius:5px;font:inherit;cursor:pointer}#scrub{flex:1;min-width:50px;accent-color:#d5ef78}#clock{font-variant-numeric:tabular-nums;min-width:94px}button:focus-visible,input:focus-visible{outline:2px solid white;outline-offset:3px}
+#notice{display:none;position:fixed;bottom:20px;left:20px;font-size:16px;color:#f2efe8}
+</style>
+</head>
+<body>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs id="filters"></defs></svg>
+<main id="stage" aria-label="Animated introduction: Saurabh H, Product Designer, designing AI product experiences, my recent projects. Case studies: Intent Identification, JiraBro, Catalog Curator.">
+<div id="light"></div>
+<div id="world" aria-hidden="true">
+<div id="name" class="type name">Saurabh H</div><div id="role" class="role">Product Designer</div>
+<div id="focus" class="type"><span class="first">designing</span><span class="word">AI product</span><span class="last word">experiences</span><span class="projects">my recent projects...</span></div>
+<div id="intent" class="type"><span class="line">Intent</span><span class="line">Identification</span></div>
+<div id="jira" class="type">JiraBro</div>
+<div id="catalog" class="type"><span class="line">Catalog</span><span class="line">Curator</span></div>
+<div id="end" class="type name">Saurabh H</div>
+<img id="avatar" alt="" src="../my_avatar_meditating.webp">
+<div id="outline"></div><div id="square"></div>
+</div><div id="grain"></div>
+</main>
+<div id="ui"><button id="play" aria-label="Play or pause animation">Pause</button><button id="restart">Restart</button><input id="scrub" aria-label="Animation time" type="range" min="0" max="14" step="0.01" value="0"><output id="clock">0.00 / 14s</output></div>
+<div id="notice" role="status">Internet is needed to load GSAP. Reconnect and reload.</div>
+<script>
+(async function(){
+const $=s=>document.querySelector(s),Q=new URLSearchParams(location.search),W=1920,H=1080,DURATION=14;
+const embedded=Q.get('embedded')==='1';
+const fit=()=>$('#stage').style.transform=`translate(-50%,-50%) scale(${(embedded?Math.max:Math.min)(innerWidth/W,innerHeight/H)})`;
+addEventListener('resize',fit);fit();
+if(!window.gsap){$('#notice').style.display='block';return;}
+await document.fonts.ready;
+// Fixed seeded texture, moved only by timeline time; no independent animation clock.
+const canvas=document.createElement('canvas');canvas.width=canvas.height=128;
+const ctx=canvas.getContext('2d'),pixels=ctx.createImageData(128,128);let seed=713;
+for(let i=0;i<pixels.data.length;i+=4){seed=(seed*1664525+1013904223)>>>0;const v=seed>>>24;pixels.data.set([v,v,v,255],i);}ctx.putImageData(pixels,0,0);$('#grain').style.backgroundImage=`url(${canvas.toDataURL()})`;
+function split(el){const chars=[];for(const node of [...el.childNodes]){if(node.nodeType!==3)continue;const frag=document.createDocumentFragment();for(const c of node.textContent){const s=document.createElement('span');s.className='char';s.textContent=c===' '?'\u00a0':c;chars.push(s);frag.append(s);}node.replaceWith(frag);}return chars;}
+const name=split($('#name')),end=split($('#end')),intent=[...$('#intent').children],jira=split($('#jira')),catalog=[...$('#catalog').children];
+const tl=gsap.timeline({paused:true});const blurStates=[];
+function blur(el,start,dur,from,to,vertical=false){const ns='http://www.w3.org/2000/svg',f=document.createElementNS(ns,'filter'),g=document.createElementNS(ns,'feGaussianBlur'),id='blur'+blurStates.length;
+f.id=id;f.setAttribute('x','-70%');f.setAttribute('y','-100%');f.setAttribute('width','240%');f.setAttribute('height','300%');f.append(g);$('#filters').append(f);blurStates.push({el:$(el),g,vertical,start,dur,from,to,id});}
+// All six beats live in one tall world. Camera travel reveals each location.
+tl.set('#world',{x:0,y:0,scale:1},0);
+gsap.set('#square',{x:1610,y:610,rotation:0});
+gsap.set('#focus .projects',{clipPath:'inset(0 100% 0 0)'});
+gsap.set('#avatar',{opacity:0,scale:.55,x:0,y:0});
+name.forEach((c,i)=>{gsap.set(c,{y:i%2?14:-14,x:0});tl.to(c,{y:0,duration:.72,ease:'power4.out'},.12+i*.025);});
+blur('#name',0,.8,0,0,true);
+tl.fromTo('#role',{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:.8,ease:'power3.out'},.7);
+tl.to('#square',{y:505,rotation:90,duration:1.05,ease:'power3.inOut'},.2);
+tl.to('#world',{y:-1400,x:-30,scale:1.035,duration:1.02,ease:'power3.inOut'},2.25);
+tl.to('#square',{x:1500,y:1890,rotation:180,duration:1.1,ease:'power3.inOut'},2.25);
+blur('#name',2.25,.75,0,22,true);
+tl.fromTo('#focus .first',{x:-110},{x:0,duration:.9,ease:'power4.out',immediateRender:false},2.6);
+tl.fromTo('#focus .word',{rotationX:70,y:100,z:-260},{rotationX:0,y:0,z:0,duration:1.1,stagger:.17,ease:'power3.out',immediateRender:false},2.7);
+blur('#focus',2.6,1.0,16,0,true);
+tl.fromTo('#focus .projects',{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:.7,ease:'power3.out',immediateRender:false},3.55);
+tl.to('#outline',{rotation:115,scale:1.25,duration:3,ease:'sine.inOut'},2.3);
+tl.to('#world',{y:-2800,x:0,scale:1,duration:.88,ease:'power3.inOut'},5.03);
+tl.to('#square',{x:1510,y:3280,rotation:270,duration:.9,ease:'power3.inOut'},5.03);
+blur('#focus',5.03,.7,0,24,true);
+tl.fromTo(intent,{x:i=>i?140:-90},{x:0,duration:.86,ease:'power4.out',stagger:.08,immediateRender:false},5.42);blur('#intent',5.42,.8,20,0);
+tl.to('#world',{y:-4200,x:-100,scale:1.035,duration:.82,ease:'power3.inOut'},6.85);
+tl.to('#square',{x:470,y:4730,rotation:405,duration:.86,ease:'power3.inOut'},6.85);
+blur('#intent',6.85,.65,0,22,true);
+tl.fromTo(jira,{rotationX:-80,y:100},{rotationX:0,y:0,duration:.72,stagger:.035,ease:'power4.out',immediateRender:false},7.12);blur('#jira',7.12,.8,14,0,true);
+tl.to('#world',{y:-5600,x:0,scale:1,duration:.88,ease:'power3.inOut'},8.35);
+tl.to('#square',{x:1230,y:6215,rotation:540,duration:.9,ease:'power3.inOut'},8.35);
+blur('#jira',8.35,.68,0,24,true);
+tl.fromTo(catalog,{x:i=>i?160:-100,letterSpacing:'.035em'},{x:0,letterSpacing:'-.045em',duration:.95,stagger:.09,ease:'power4.out',immediateRender:false},8.65);blur('#catalog',8.65,.85,18,0);
+tl.to('#world',{y:-7000,scale:1,duration:1.05,ease:'power3.inOut'},10.1);
+tl.to('#square',{x:1610,y:7505,rotation:720,duration:1.1,ease:'power3.inOut'},10.1);
+blur('#catalog',10.1,.8,0,20,true);
+tl.fromTo(end,{y:80},{y:0,duration:.8,stagger:.025,ease:'power4.out',immediateRender:false},10.5);blur('#end',10.5,.9,14,0,true);
+tl.to('#avatar',{opacity:1,scale:1,duration:.65,ease:'power3.out'},11.5);
+tl.to('#avatar',{x:-665,y:-65,scale:3.45,duration:1.5,ease:'power3.inOut'},12.1);
+if(!embedded)tl.to('#avatar',{opacity:0,duration:.4,ease:'sine.inOut'},13.6);
+tl.to('#end',{opacity:0,duration:.38},13.15);
+end.forEach((c,i)=>tl.to(c,{y:i%2?14:-14,duration:.5,ease:'sine.inOut'},13.5));
+tl.to('#square',{y:7610,rotation:720,duration:.5,ease:'sine.inOut'},13.5);
+// A closed periodic path makes the background match at both ends of the loop.
+function render(){const t=tl.time(),a=t/DURATION*Math.PI*2;$('#light').style.transform=`translate(${Math.sin(a)*210}px,${(Math.cos(a)-1)*80}px)`;const k=Math.floor(t*12)%168;$('#grain').style.transform=`translate(${k*37%60-30}px,${k*61%60-30}px)`;for(const b of blurStates)b.el.style.filter='none';for(const b of blurStates){if(t>=b.start&&t<b.start+b.dur){const u=(t-b.start)/b.dur,v=b.from+(b.to-b.from)*(1-Math.pow(1-u,3));b.g.setAttribute('stdDeviation',b.vertical?`${v*.08} ${v}`:`${v} ${v*.08}`);b.el.style.filter=`url(#${b.id})`;}}$('#scrub').value=t;$('#clock').textContent=t.toFixed(2)+' / 14s';$('#play').textContent=tl.paused()?'Play':'Pause';}
+let signaled=false;
+tl.eventCallback('onUpdate',()=>{render();if(embedded&&!signaled&&tl.time()>=13.35){signaled=true;parent.postMessage({type:'saurabh-intro-complete'},location.origin);}});
+tl.eventCallback('onComplete',()=>{if(!embedded)tl.play(0);});
+function seek(t){tl.pause();tl.time(Math.max(0,Math.min(DURATION,t)),true);render();}
+function toggle(){tl.paused()?tl.play(tl.time()>=DURATION?0:tl.time()):tl.pause();render();}
+$('#play').onclick=toggle;$('#restart').onclick=()=>{tl.play(0);render();};$('#scrub').oninput=e=>seek(+e.target.value);
+addEventListener('keydown',e=>{if(e.target.matches('input,button'))return;if(e.code==='Space'){e.preventDefault();toggle();}if(e.key.toLowerCase()==='r'){tl.play(0);render();}});
+if(Q.get('debug')==='1')$('#ui').classList.add('on');
+window.OPENER={tl,DURATION,W,H,seek,seekFrame:async t=>seek(t),ready:true};
+tl.time(DURATION,true);tl.time(0,true);seek(0);if(!Q.has('clean'))tl.play(0);
+})();
+</script>
+</body></html>

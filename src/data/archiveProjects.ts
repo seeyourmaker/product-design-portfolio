@@ -21,11 +21,11 @@ export type ArchiveProject = {
   chapters: ArchiveChapter[];
 };
 
-export const archiveProjects: ArchiveProject[] = [
+const allArchiveProjects: ArchiveProject[] = [
   {
     slug: 'farmer-logistics', title: 'Logistics Solutions for Farmers', category: 'Product design · System design', year: '2024',
     eyebrow: 'FARMERS + TRANSPORT', headline: 'A route from harvest to market.', lead: 'A concept for helping farmers with smaller yields arrange transport to nearby markets and warehouses.',
-    tags: ['Research', 'Service concept', 'Prototype'], hero: 0,
+    tags: ['Research', 'Service concept', 'Prototype'], hero: 16,
     source: 'https://logistics-solutions-for--rptmr10.gamma.site/', sourceLabel: 'Original presentation',
     chapters: [
       {label: '01 / FIELDWORK', title: 'Start with the journey of the goods.', copy: 'The original case study documents conversations with farmers, truck drivers, market vendors, and contractors in Madhya Pradesh. It maps the handoffs around harvest, loading, transport, and sale.', images: [9, 10, 13, 16], caption: 'Field and transport photographs from the original presentation.'},
@@ -46,7 +46,7 @@ export const archiveProjects: ArchiveProject[] = [
     ],
   },
   {
-    slug: 'accessible-mobile-cover', title: 'Accessible Mobile Cover', category: 'Accessibility · Product concept', year: '2023',
+    slug: 'accessible-mobile-cover', title: 'Accessible Mobile Cover (Patent Filed)', category: 'Accessibility · Product concept', year: '2023',
     eyebrow: 'TACTILE ACCESS TO MESSAGES', headline: 'A phone cover imagined for private reading.', lead: 'A concept for a mobile cover that could present notifications and messages as temporary Braille on its back.',
     tags: ['Accessibility concept', 'Physical product', 'Prototype'], hero: 20,
     source: 'https://gamma.app/public/Accessible-Design-for-Special-Needs-3orbw1e2aah77hg', sourceLabel: 'Original presentation',
@@ -158,5 +158,7 @@ export const archiveProjects: ArchiveProject[] = [
     ],
   },
 ];
+
+export const archiveProjects = allArchiveProjects.filter(project => !['udent','facebook-dark-theme'].includes(project.slug));
 
 export const archiveProjectBySlug = Object.fromEntries(archiveProjects.map(project => [project.slug, project])) as Record<string, ArchiveProject>;

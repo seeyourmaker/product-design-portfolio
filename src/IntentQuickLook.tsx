@@ -3,10 +3,8 @@ import {ArrowLeft,ArrowRight,ArrowUpRight,Check,GitBranch,MessageCircle,ShieldCh
 import {IntentInterpretation,IntentResponseExperience,IntentUnderstanding} from './IntentThumbnails';
 import './IntentQuickLook.css';
 
-export const intentQuickLookPath = '/projects/intent-identification/quick-look';
-
 const slides = [
-  {name:'Introduction',eyebrow:'AI experience design · Intent Identification',title:'Inside the Mind of an AI',copy:'What happens between a user asking an AI to create something—and the AI deciding what to do? I redesigned how Catalog Curator interprets requests, handles uncertainty, and prepares safer service drafts.'},
+  {name:'Introduction',eyebrow:'AI experience design · Intent Identification',title:'Inside the Mind of an AI',copy:'What happens between a user asking an AI to create something and the AI deciding what to do? I redesigned how Catalog Curator interprets requests, handles uncertainty, and prepares safer service drafts.'},
   {name:'Before vs. After',eyebrow:'02 / The interaction',title:'From immediate generation to intent-aware guidance.',copy:'A detailed configuration is useful when the request is ready. When material choices remain unresolved, generating first leaves the user to inspect a large draft and untangle its assumptions. It also results in larger token consumption.'},
   {name:'Why intent comes first',eyebrow:'03 / Why intent comes first',title:"The problem wasn’t prompt length. It was deciding when to act.",copy:'A long request can be clear. A short request can hide a critical decision. The assistant needed a way to distinguish the two before creating a service.'},
   {name:'The decision framework',eyebrow:'04 / Designing the decision framework',title:'Three decisions. No guesswork.',copy:'I designed a pre-generation guardrail around the existing intent system. It checks whether the request can be safely resolved, needs one targeted clarification, or asks for an unsupported capability.'},
@@ -58,9 +56,16 @@ const configuration=[
   {title:'Service Cost & Quantity',columns:['Attribute','Value'],rows:[['Payment type','Free'],['Price','0'],['Quantity','One reservation']]},
 ];
 
-function BeforeExperience(){
+function BeforeExperience({pageStartedAt}:{pageStartedAt:number}){
   const scroll=useRef<HTMLDivElement>(null);
-  const [playing,setPlaying]=useState(()=>!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const [playing,setPlaying]=useState(false);
+  const manuallyControlled=useRef(false);
+  useEffect(()=>{
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const remaining=Math.max(0,5000-(performance.now()-pageStartedAt));
+    const timer=window.setTimeout(()=>{if(!manuallyControlled.current)setPlaying(true)},remaining);
+    return()=>window.clearTimeout(timer);
+  },[pageStartedAt]);
   const [replay,setReplay]=useState(0);
   useEffect(()=>{
     const preference=window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -83,18 +88,42 @@ function BeforeExperience(){
     return()=>cancelAnimationFrame(frame);
   },[playing,replay]);
   return <div className="ql-before-demo">
-    <div className="ql-demo-toolbar"><span><Sparkles size={13} aria-hidden="true"/>Catalog Curator <small>Fictional data</small></span><div><button aria-label={playing?'Pause response animation':'Play response animation'} onClick={()=>setPlaying(value=>!value)}>{playing?<Pause size={15}/>:<Play size={15}/>}</button><button aria-label="Replay response animation" onClick={()=>{scroll.current?.scrollTo({top:0,behavior:'instant' as ScrollBehavior});setReplay(value=>value+1);setPlaying(true)}}><RotateCcw size={15}/></button></div></div>
-    <div ref={scroll} className="ql-before-scroll" tabIndex={0} role="region" aria-label="Fictional service configuration response. Scroll to read all six sections." data-local-pan onPointerDown={()=>setPlaying(false)} onWheel={()=>setPlaying(false)} onKeyDown={()=>setPlaying(false)} onFocus={()=>setPlaying(false)}>
+    <div className="ql-demo-toolbar"><span><Sparkles size={13} aria-hidden="true"/>Catalog Curator <small>Fictional data</small></span><div><button aria-label={playing?'Pause response animation':'Play response animation'} onClick={()=>{manuallyControlled.current=true;setPlaying(value=>!value)}}>{playing?<Pause size={15}/>:<Play size={15}/>}</button><button aria-label="Replay response animation" onClick={()=>{manuallyControlled.current=true;scroll.current?.scrollTo({top:0,behavior:'instant' as ScrollBehavior});setReplay(value=>value+1);setPlaying(true)}}><RotateCcw size={15}/></button></div></div>
+    <div ref={scroll} className="ql-before-scroll" tabIndex={0} role="region" aria-label="Fictional service configuration response. Scroll to read all six sections." data-local-pan onPointerDown={()=>{manuallyControlled.current=true;setPlaying(false)}} onWheel={()=>{manuallyControlled.current=true;setPlaying(false)}} onKeyDown={()=>{manuallyControlled.current=true;setPlaying(false)}} onFocus={()=>{manuallyControlled.current=true;setPlaying(false)}}>
       <div className="ql-before-prompt">Create a service to reserve meeting rooms. There should be an option to choose from different sites.</div>
       <div className="ql-config-response"><span className="ql-config-label"><Sparkles size={14} aria-hidden="true"/>Service configuration</span>{configuration.map(section=><section key={section.title}><h3>{section.title}</h3><div className="ql-table-scroll" role="region" tabIndex={0} aria-label={`${section.title} table; scroll horizontally if needed`}><table><thead><tr>{section.columns.map(column=><th scope="col" key={column}>{column}</th>)}</tr></thead><tbody>{section.rows.map((row,i)=><tr key={i}>{row.map((cell,j)=>j===0?<th scope="row" key={j}>{cell}</th>:<td key={j}>{cell}</td>)}</tr>)}</tbody></table></div></section>)}<p>Review the details above. Create the service or continue editing the draft.</p><span className="ql-demo-create">Create service</span></div>
     </div><div className="ql-demo-footer"><span>6 sections · one generated draft</span><span>{playing?'Auto-scrolling':'Paused · scroll to explore'}</span></div>
   </div>;
 }
 
-function Comparison(){
+function AfterExperience({pageStartedAt}:{pageStartedAt:number}){
+  const video=useRef<HTMLVideoElement>(null);
+  const manuallyControlled=useRef(false);
+  const [playing,setPlaying]=useState(false);
+  useEffect(()=>{
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const timer=window.setTimeout(()=>{if(!manuallyControlled.current)setPlaying(true)},Math.max(0,5000-(performance.now()-pageStartedAt)));
+    return()=>window.clearTimeout(timer);
+  },[pageStartedAt]);
+  useEffect(()=>{
+    const element=video.current;
+    if(!element)return;
+    if(playing)void element.play().catch(()=>setPlaying(false));
+    else element.pause();
+  },[playing]);
+  const toggle=()=>{manuallyControlled.current=true;setPlaying(value=>!value)};
+  const replay=()=>{manuallyControlled.current=true;if(video.current)video.current.currentTime=0;setPlaying(true);void video.current?.play().catch(()=>setPlaying(false))};
+  return <div className="ql-after-demo" data-after-mockup-slot>
+    <div className="ql-demo-toolbar ql-after-toolbar"><span>Intent Identification <small>Interaction walkthrough</small></span><div><button aria-label={playing?'Pause interaction video':'Play interaction video'} onClick={toggle}>{playing?<Pause size={15}/>:<Play size={15}/>}</button><button aria-label="Replay interaction video" onClick={replay}><RotateCcw size={15}/></button></div></div>
+    <video ref={video} className="ql-after-video" src="/intent/intent-identification-demo.mp4" preload="metadata" muted playsInline onEnded={()=>setPlaying(false)} aria-label="Intent Identification interaction walkthrough"/>
+    <div className="ql-demo-footer"><span>Intent Identification · interaction walkthrough</span><span>{playing?'Playing':'Paused'}</span></div>
+  </div>;
+}
+
+function Comparison({pageStartedAt}:{pageStartedAt:number}){
   return <><div className="ql-comparison">
-    <article className="ql-comparison-panel"><div className="ql-comparison-label"><span>Before</span><small>Existing interaction</small></div><BeforeExperience/><p className="ql-comparison-caption">Generate first, leaving the user to inspect a large draft.</p></article>
-    <article className="ql-comparison-panel ql-comparison-panel--after"><div className="ql-comparison-label"><span>After</span><small>Design direction</small></div><div className="ql-after-slot" data-after-mockup-slot><span className="ql-mini">Final UI pending</span><div className="ql-mockup-outline" aria-hidden="true"><Square size={36} strokeWidth={1}/><span/></div><h2>Understand first.<br/>Then create.</h2><p>Redesigned experience — final mockup to be added.</p><div className="ql-behavior-preview"><span className="ql-mini">Conceptual behavior</span><p>Interpret request <span>→</span> Check for material ambiguity <span>→</span> Ask one meaningful question or generate an appropriate draft</p></div></div><p className="ql-comparison-caption">Understand intent first; clarify only when necessary, then generate the right response.</p></article>
+    <article className="ql-comparison-panel"><div className="ql-comparison-label"><span>Before</span><small>Existing interaction</small></div><BeforeExperience pageStartedAt={pageStartedAt}/><p className="ql-comparison-caption">Generate first, leaving the user to inspect a large draft.</p></article>
+    <article className="ql-comparison-panel ql-comparison-panel--after"><div className="ql-comparison-label"><span>After</span><small>Design direction</small></div><AfterExperience pageStartedAt={pageStartedAt}/><p className="ql-comparison-caption">Understand intent first; clarify only when necessary, then generate the right response.</p></article>
   </div><p className="ql-takeaway">Clear requests can go straight to a complete draft.</p></>;
 }
 
@@ -134,7 +163,7 @@ function Iteration(){
 function Results(){
   return <div className="ql-results"><figure className="ql-metric"><div className="ql-metric-top"><span className="ql-mini">Initial-prompt handling</span><span className="ql-test-label"><span/>Reported development testing</span></div><div className="ql-metric-values"><div><span>Before</span><strong>~60k</strong></div><ArrowRight className="ql-metric-arrow" strokeWidth={1} aria-hidden="true"/><div><span>After</span><strong>~20k</strong></div><div className="ql-metric-reduction"><b>~67%</b><span>fewer tokens</span></div></div><div className="ql-metric-bars" aria-hidden="true"><span/><span/></div><figcaption>Tokens used for initial prompts, including “Hello” and “What can you do?” The reported reduction reflects combined prompt, decision, and instruction improvements; it is not attributed solely to Jev.</figcaption><p className="ql-metric-caveat">A typical complete service-creation flow previously used ~80k–100k tokens. Its optimized total has not been established. Test conditions and token-count methodology still require owner verification.</p></figure>
     <div className="ql-result-tiles">{[['01','A clearer decision framework','Generate · clarify · unsupported'],['02','Purposeful conversations','Clear · ambiguous · unsupported patterns'],['03','A practical iteration','Prototype → instructions → Jev in dev']].map(([n,t,d])=><div key={n}><span>{n}</span><strong>{t}</strong><p>{d}</p></div>)}</div>
-    <div className="ql-closing"><p>The right question.<br/><em>Only when necessary.</em></p><div><button className="ql-future-cta" disabled>View full case study <ArrowUpRight size={17} aria-hidden="true"/></button><span>Full case study · coming later</span></div></div>
+    <div className="ql-closing"><p>The right question.<br/><em>Only when necessary.</em></p><div><a className="ql-future-cta" href="/projects/intent-identification">View full case study <ArrowUpRight size={17} aria-hidden="true"/></a></div></div>
   </div>;
 }
 
@@ -149,14 +178,14 @@ function MigratedVisual({kind,children}:{kind:string,children:ReactNode}){
   return <div className="ql-migrated-container"><div ref={wrapper} className={`ql-migrated ql-migrated--${kind}`} tabIndex={kind==='interpretation'?0:undefined} role={kind==='interpretation'?'region':undefined} aria-label={kind==='interpretation'?'Intent relationship map; scroll horizontally on small screens':undefined} data-local-pan={kind==='interpretation'||undefined}>{children}</div>{kind==='interpretation'&&<p className="ql-graph-hint">Swipe to explore the map · arrow keys when focused</p>}</div>;
 }
 
-function SlideVisual({index}:{index:number}){
+function SlideVisual({index,pageStartedAt}:{index:number,pageStartedAt:number}){
   switch(index){
     case 0:return <HeroVisual/>;
-    case 1:return <Comparison/>;
+    case 1:return <Comparison pageStartedAt={pageStartedAt}/>;
     case 2:return <IntentDecision/>;
     case 3:return <><div className="ql-framework"><MigratedVisual kind="interpretation"><IntentInterpretation/></MigratedVisual><Outcomes/></div><FrameworkDetail/><p className="ql-takeaway">Complexity is not a decision outcome.</p></>;
     case 4:return <><MigratedVisual kind="understanding"><IntentUnderstanding/></MigratedVisual><p className="ql-takeaway">Recognize the actions. Then check whether they can be resolved safely.</p></>;
-    case 5:return <><p className="ql-pattern-note">Earlier response exploration · retained design study, not the pending final After UI. Deliverables below describe design aims; hallucination and cognitive-load reductions were not measured.</p><MigratedVisual kind="response"><IntentResponseExperience/></MigratedVisual><details className="ql-detail"><summary><span><MessageCircle size={16} aria-hidden="true"/>Explore the three conversation patterns</span></summary><Conversations/><aside className="ql-clarification-example"><span className="ql-mini">Designed clarification · mobile phone scenario</span><p>“How would you like to configure the approval workflow?”</p><div><span>AI recommendation</span><span>Choose an existing workflow</span></div></aside><p className="ql-pattern-note">Final conversation mockups are pending. These describe intended behavior, not shipped capability.</p></details></>;
+    case 5:return <><p className="ql-pattern-note">Earlier response exploration · retained design study, not the pending final After UI. Deliverables below describe design aims; hallucination and cognitive-load reductions were not measured.</p><MigratedVisual kind="response"><IntentResponseExperience/></MigratedVisual><details className="ql-detail"><summary><span><MessageCircle size={16} aria-hidden="true"/>Explore the three conversation patterns</span></summary><Conversations/><aside className="ql-clarification-example"><span className="ql-mini">Designed clarification · mobile phone scenario</span><p>“How would you like to configure the approval workflow?”</p><div><span>AI recommendation</span><span>Choose an existing workflow</span></div></aside><p className="ql-pattern-note">These studies describe intended behavior; they are not production screenshots or proof of shipped capability.</p></details></>;
     case 6:return <Iteration/>;
     default:return <Results/>;
   }
@@ -164,12 +193,13 @@ function SlideVisual({index}:{index:number}){
 
 export function IntentQuickLook({onBack}:{onBack:()=>void}) {
   const [active,setActive]=useState(0);
+  const pageStartedAt=useRef(performance.now());
   const viewport=useRef<HTMLElement>(null);
   const heading=useRef<HTMLHeadingElement>(null);
   const slide=slides[active];
   useEffect(()=>{
     const previousTitle=document.title;
-    document.title='Intent Identification — Quick Look';
+    document.title='Intent Identification | Quick Look';
     return()=>{document.title=previousTitle};
   },[]);
   useEffect(()=>{
@@ -199,7 +229,7 @@ export function IntentQuickLook({onBack}:{onBack:()=>void}) {
     <main ref={viewport} className="ql-viewport" id="quick-look-content">
       <section key={active} className={`ql-slide ql-slide--${active+1}`} aria-roledescription="slide" aria-label={`${active+1} of ${slides.length}: ${slide.name}`}>
         <div className="ql-slide-heading"><p className="ql-eyebrow"><span/>{slide.eyebrow}</p><h1 ref={heading} tabIndex={-1}>{slide.title}</h1><p className="ql-intro">{slide.copy}</p>{active===0&&<dl className="ql-metadata"><div><dt>Role</dt><dd>Product Designer</dd></div><div><dt>Focus</dt><dd>UX research · Intent framework<br/>Conversation design</dd></div><div><dt>Product</dt><dd><ProductOverview/></dd></div></dl>}</div>
-        <div className="ql-slide-visual"><SlideVisual index={active}/></div>
+        <div className="ql-slide-visual"><SlideVisual index={active} pageStartedAt={pageStartedAt.current}/></div>
         {active===0&&<div className="ql-cover-note"><span>From an AI that always tries to generate</span><ArrowRight size={17} aria-hidden="true"/><strong>To an AI that knows when to clarify.</strong></div>}
       </section>
     </main>

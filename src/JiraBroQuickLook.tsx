@@ -3,8 +3,6 @@ import {gsap} from 'gsap';
 import {ArrowLeft,ArrowRight,ArrowUpRight,Check,Code2,Layers,ShieldCheck} from 'lucide-react';
 import './JiraBroQuickLook.css';
 
-export const jiraBroQuickLookPath='/projects/jira-worklog-assistant/quick-look';
-export const isJiraBroQuickLookPath=(path:string)=>path.replace(/\/$/,'')===jiraBroQuickLookPath;
 type Slide={name:string;eyebrow:string;title:string;copy:string};
 const slides:Slide[]=[
   {name:'The idea',eyebrow:'JiraBro · AI × product design × engineering',title:'I wanted a Jira chatbot. So I built one.',copy:'JiraBro turns a natural-language work update into a Jira worklog the person can review before submitting. I designed and built the assistant from a small local proof of concept into a working web product.'},
@@ -69,7 +67,7 @@ export function JiraBroQuickLook({onBack}:{onBack:()=>void}){
   const root=useRef<HTMLDivElement>(null),viewport=useRef<HTMLElement>(null),heading=useRef<HTMLHeadingElement>(null);
   const focusAfterChange=useRef(false);
   const slide=slides[active];
-  useEffect(()=>{const title=document.title;document.title='JiraBro — Quick Look | Saurabh';return()=>{document.title=title};},[]);
+  useEffect(()=>{const title=document.title;document.title='JiraBro | Quick Look | Saurabh';return()=>{document.title=title};},[]);
   useEffect(()=>{
     viewport.current?.scrollTo({top:0,behavior:'instant'});
     if(focusAfterChange.current||document.activeElement===document.body){heading.current?.focus({preventScroll:true});focusAfterChange.current=false;}

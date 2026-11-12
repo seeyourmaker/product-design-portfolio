@@ -67,3 +67,12 @@
  .ql-before-scroll{height:auto}
  .ql-after-slot{min-height:430px}
 }
+.ql-future-cta[href]{cursor:pointer;text-decoration:none}
+.ql-future-cta[href]:hover{border-color:#cf9aef;color:#d7e2ea}
+
+.ql-after-demo{border:1px solid #cf75ff55;border-radius:18px;background:#17121c;overflow:hidden;min-width:0;color:#e0c7ee}
+.ql-after-toolbar{background:#22172b;border-bottom-color:#cf75ff33;color:#e0c7ee}
+.ql-after-toolbar small{color:#bba6c8}
+.ql-after-video{display:block;width:100%;height:320px;object-fit:cover;background:#17121c}
+.ql-after-demo .ql-demo-footer{border-top-color:#cf75ff33;color:#bba6c8}
+@media(max-width:639px){.ql-after-video{object-fit:contain}}

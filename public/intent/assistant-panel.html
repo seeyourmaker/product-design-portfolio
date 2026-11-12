@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mobile phone service draft</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#161419;color:#e7e2eb;font-family:system-ui,sans-serif}main{overflow-x:auto}svg{display:block;width:100%;min-width:960px;height:auto}text{fill:#e7e2eb}.role{font-size:12px;letter-spacing:1.5px;fill:#b8afbf}.name{font-size:22px;font-weight:600}.copy{font-size:16px}.hint{font-size:14px;fill:#c6bdcd}.row{font-size:16px}.wire{stroke:#a89cad;stroke-width:1.5;fill:none}.card{fill:#211e25;stroke:#514956}.draft{fill:#271f30;stroke:#bc8cda}
+</style></head><body><main><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="assistant-panel-title assistant-panel-desc"><title id="assistant-panel-title">Mobile phone service draft</title><desc id="assistant-panel-desc">Catalog Curator turns the administrator’s request into six reviewable service sections, then invites the administrator to create the service or continue editing.</desc>
+<defs><marker id="tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#a89cad"/></marker></defs>
+<text x="32" y="52" class="role">CATALOG ADMINISTRATOR</text><text x="416" y="52" class="role">CATALOG CURATOR</text>
+<path class="wire" marker-end="url(#tip)" d="M352 176H415"/><path class="wire" marker-end="url(#tip)" d="M416 396H353"/>
+<rect class="card" x="32" y="96" width="320" height="144" rx="8"/><text x="56" y="140" class="name">Request</text><text x="56" y="180" class="copy">“Create a mobile phone service</text><text x="56" y="204" class="copy">and add an approval step.”</text>
+<rect class="draft" x="416" y="80" width="512" height="436" rx="8"/><text x="444" y="124" class="name">Mobile phone request</text><text x="444" y="156" class="hint">Assigned workflow</text><text x="600" y="156" class="copy" id="assigned-workflow" style="fill:#dfb8f4">Unresolved</text>
+<path d="M444 190H900" stroke="#514956"/><text class="row" x="444" y="221">Service</text><path class="wire" d="m880 214 5 5 5 -5"/><path d="M444 238H900" stroke="#514956"/><text class="row" x="444" y="269">Service parameters</text><path class="wire" d="m880 262 5 5 5 -5"/><path d="M444 286H900" stroke="#514956"/><text class="row" x="444" y="317">Service details</text><path class="wire" d="m880 310 5 5 5 -5"/><path d="M444 334H900" stroke="#514956"/><text class="row" x="444" y="365">Workflow</text><path class="wire" d="m880 358 5 5 5 -5"/><path d="M444 382H900" stroke="#514956"/><text class="row" x="444" y="413">Questionnaire</text><path class="wire" d="m880 406 5 5 5 -5"/><path d="M444 430H900" stroke="#514956"/><text class="row" x="444" y="461">Service Cost &amp; Quantity</text><path class="wire" d="m880 454 5 5 5 -5"/>
+<rect class="card" x="32" y="328" width="320" height="172" rx="8"/><text x="56" y="372" class="name">Review the draft</text><text x="56" y="412" class="copy">Open a section to check its details.</text><text x="56" y="448" class="hint">Choose Create service to confirm,</text><text x="56" y="470" class="hint">or continue editing in the conversation.</text>
+</svg></main><script>
+const workflow = new URLSearchParams(window.location.search).get('workflow');
+if (workflow) document.getElementById('assigned-workflow').textContent = workflow;
+</script></body></html>

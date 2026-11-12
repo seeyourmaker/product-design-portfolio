@@ -1,0 +1,84 @@
+.ifd-section{padding:86px 0;border-bottom:1px solid var(--ic-line)}
+.ifd-intro{max-width:800px;margin-bottom:34px}.ifd-intro h2{font-size:clamp(32px,4vw,52px);margin:14px 0 12px}.ifd-intro p{font-size:16px;color:var(--ic-muted);max-width:700px}
+.ifd-stage{aspect-ratio:16/9;min-height:600px;overflow:hidden;border:1px solid #4c4650;border-radius:2px;background:#f9fafa;position:relative;color:#22242a;font-family:'Open Sans',Arial,sans-serif;font-size:13px}.ifd-figma-app{height:100%;display:flex;flex-direction:column;background:#f9fafa}.ifd-header{height:54px;flex:none;border-bottom:2px solid #ff5a4d;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:18px;font-weight:400;line-height:28px}.ifd-header>div{display:flex;align-items:center;gap:24px;font-size:23px;font-weight:300;line-height:1}.ifd-chat-area{flex:1;min-height:0;position:relative;display:flex;flex-direction:column;justify-content:center}.ifd-welcome{width:min(640px,90%);margin:0 auto;text-align:center;transform:translateY(-5%)}.ifd-welcome h3{font-size:28px;line-height:43px;font-weight:400;color:#f86e00;margin:0 0 4px}.ifd-welcome p{font-size:15px;line-height:23px;color:#555868;font-weight:300;margin:0}.ifd-welcome button{margin-top:18px;border:1px solid #3759d8;color:#3759d8;background:#fff;border-radius:4px;padding:9px 17px;font:inherit;font-size:13px}.ifd-conversation{width:calc(100% - 90px);max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:14px;justify-content:flex-end}.ifd-conversation.is-final{width:min(690px,86%)}.ifd-message-user{align-self:flex-end;max-width:80%}.ifd-message-user time{display:block;text-align:right;color:#707589;font-size:10px;margin:0 43px 5px 0}.ifd-user-row{display:flex;align-items:center;gap:10px}.ifd-user-bubble{background:#e5e4fa;border-radius:18px;padding:14px 12px;font-size:13px;line-height:20px;color:#22242a}.ifd-avatar{width:29px;height:29px;flex:none;border-radius:50%;background:#f0f0f2;border:1px solid #d7d8dd}.ifd-message-assistant{display:flex;gap:12px;min-width:0}.ifd-sparkle{width:24px;flex:none}.ifd-assistant-content{min-width:0;flex:1}.ifd-sender{font-weight:600;font-size:12px;margin:0 0 4px 8px}.ifd-sender time{font-size:10px;color:#707589;font-weight:400;margin-left:6px}.ifd-question-card,.ifd-response{border-radius:20px;background:#f1f1f4;padding:16px 16px 22px}.ifd-question-lead{margin:0 0 9px;font-size:13px;line-height:20px}.ifd-form{border:1px solid #d9d9df;border-radius:8px;padding:13px 13px 12px;min-height:190px;display:flex;flex-direction:column}.ifd-form>p{font-size:13px;margin:0 0 11px;line-height:20px}.ifd-radio-options{display:grid;gap:7px}.ifd-radio-option{display:flex;align-items:center;gap:8px;font-size:13px;line-height:19px}.ifd-radio{width:14px;height:14px;border:1px solid #9da5b5;border-radius:50%;flex:none;background:#fff}.ifd-radio.is-selected{border-color:#ff5a4d;box-shadow:inset 0 0 0 3px white;background:#ff5a4d}.ifd-submit{align-self:flex-end;margin-top:auto;border:1px solid #3759d8;border-radius:4px;color:#3759d8;background:#fff;padding:8px 13px;font:inherit;font-size:12px}.ifd-count{display:block;text-align:right;font-size:10px;color:#707589;margin:16px 1px -11px}.ifd-count span{display:inline-block;width:7px;height:7px;background:#12b583;border-radius:50%}.ifd-feedback{font-size:13px;color:#7b7f8e;margin:7px 0 0 15px}.ifd-response{padding:14px 13px 22px}.ifd-response-lead{margin:0 0 15px;font-size:13px;line-height:20px}.ifd-response-lead strong{font-weight:600}.ifd-accordion-row{border-bottom:1px solid #d7d8df;min-height:43px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px}.ifd-accordion-row:first-child{min-height:54px;padding-top:2px}.ifd-accordion-row strong{display:block;font-size:14px;font-weight:600;line-height:20px}.ifd-accordion-row small{display:block;color:#555868;font-size:11px;margin-top:2px}.ifd-accordion-row>span{font-size:17px;line-height:1}.ifd-response-foot{border-top:1px solid #d7d8df;margin:0;padding:16px 0 0;font-size:13px;line-height:24px}.ifd-input-area{flex:none;padding:0 8px 8px}.ifd-input-box{height:94px;border:1px solid #4646dc;border-radius:8px;background:#fff;box-shadow:0 4px 12px 4px #0000000f,0 1px 4px #0000002b;display:flex;flex-direction:column;justify-content:space-between;padding:15px 14px 9px}.ifd-input-text{color:#707589;font-size:13px;line-height:20px}.ifd-beat-1 .ifd-input-text{color:#22242a}.ifd-input-actions{display:flex;justify-content:space-between;align-items:center;font-size:20px;line-height:1}.ifd-input-actions>div{display:flex;gap:23px;font-size:15px}.ifd-input-foot{display:flex;justify-content:space-between;color:#555868;font-size:10px;line-height:16px;margin:7px 4px 0}.ifd-input-foot b{color:#f86e00}.ifd-controls{display:flex;align-items:center;justify-content:space-between;padding:14px 2px;color:var(--ic-muted);font-size:12px}.ifd-controls button{display:inline-flex;align-items:center;gap:7px;border:1px solid #6b5476;border-radius:6px;padding:8px 12px;color:var(--ic-ink);font:inherit;background:#241b2b;cursor:pointer}.ifd-controls button:hover,.ifd-controls button:focus-visible{background:#36233f;outline:2px solid #b885d2;outline-offset:2px}
+.ifd-beat-2 .ifd-question-card,.ifd-beat-2 .ifd-sender,.ifd-beat-2 .ifd-feedback{opacity:0}.ifd-beat-3 .ifd-form,.ifd-beat-3 .ifd-count{opacity:0}.ifd-beat-5 .ifd-submit{background:#3759d8;color:white}.ifd-question-card,.ifd-response,.ifd-form,.ifd-count{transition:opacity .55s ease,transform .55s ease}.ifd-beat-3 .ifd-question-card{transform:translateY(8px)}
+@media(max-width:700px){.ifd-section{padding:58px 0}.ifd-stage{aspect-ratio:auto;height:690px;min-height:0}.ifd-header{height:46px;padding:0 13px;font-size:15px}.ifd-header>div{gap:14px;font-size:18px}.ifd-welcome h3{font-size:21px;line-height:30px}.ifd-welcome p{font-size:12px;line-height:19px}.ifd-conversation,.ifd-conversation.is-final{width:calc(100% - 22px)}.ifd-message-user{max-width:90%}.ifd-user-bubble{font-size:11px;padding:10px}.ifd-message-assistant{gap:3px}.ifd-sparkle{width:12px}.ifd-question-card,.ifd-response{padding:10px}.ifd-form{padding:9px;min-height:180px}.ifd-form>p,.ifd-radio-option,.ifd-question-lead,.ifd-response-lead,.ifd-response-foot{font-size:11px;line-height:17px}.ifd-radio-options{gap:6px}.ifd-accordion-row{min-height:37px;padding:7px}.ifd-accordion-row:first-child{min-height:44px}.ifd-accordion-row strong{font-size:12px}.ifd-accordion-row small{font-size:9px}.ifd-response-foot{line-height:18px;padding-top:9px}.ifd-input-box{height:80px}.ifd-input-foot{font-size:8px}.ifd-input-foot>span:last-child{max-width:75%;text-align:right}.ifd-controls>span{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.ifd-stage *{transition:none!important;animation:none!important}}
+/* The three design states share one mounted application frame. GSAP owns view opacity and movement. */
+.ifd-view{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;pointer-events:none}.ifd-view-start{visibility:visible;opacity:1}.ifd-view-question .ifd-conversation{margin-top:auto;margin-bottom:auto}.ifd-view-final .ifd-conversation{margin-top:auto;margin-bottom:auto}.ifd-view .ifd-conversation{max-height:calc(100% - 16px)}.ifd-cursor{position:absolute;z-index:5;left:76%;top:78%;color:#202026;filter:drop-shadow(0 2px 2px #0005);pointer-events:none;visibility:hidden;opacity:0;transform-origin:top left}.ifd-sparkle{color:#f86e00}.ifd-question-lead,.ifd-response-lead{display:flex;align-items:flex-start;gap:4px}.ifd-question-lead svg,.ifd-response-lead svg{color:#11a13c;flex:none;margin-top:2px}.ifd-feedback{height:18px;display:flex;align-items:center}.ifd-input-actions>div{align-items:center;gap:14px;color:#22242a}.ifd-input-actions>svg{color:#22242a}.ifd-input-foot>span:last-child{display:flex;align-items:center;gap:3px}.ifd-input-foot>span:last-child svg{color:#f86e00;flex:none}.ifd-send-icon{display:none}.ifd-avatar{background:#f0f0f2}.ifd-radio-option:first-child{border-radius:3px}.ifd-question-card,.ifd-response,.ifd-form,.ifd-count{transition:none}.ifd-beat-2 .ifd-question-card,.ifd-beat-2 .ifd-sender,.ifd-beat-2 .ifd-feedback,.ifd-beat-3 .ifd-form,.ifd-beat-3 .ifd-count{opacity:1}
+@media(max-width:700px){.ifd-view .ifd-conversation{max-height:calc(100% - 10px)}.ifd-cursor{width:18px;height:18px}.ifd-view-question .ifd-conversation{margin-bottom:8px}.ifd-view-final .ifd-conversation{margin-bottom:8px}}
+
+/* Match the portfolio palette throughout the embedded assistant. */
+.ifd-stage {
+  --ifd-bg: #0c0c0c;
+  --ifd-surface: #151318;
+  --ifd-raised: #201b26;
+  --ifd-hover: #30203c;
+  --ifd-line: #493d50;
+  --ifd-ink: #d7e2ea;
+  --ifd-muted: #aab0bd;
+  --ifd-accent: #cf9aef;
+  background: var(--ifd-bg);
+  border-color: var(--ifd-line);
+  color: var(--ifd-ink);
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+}
+.ifd-figma-app, .ifd-chat-area, .ifd-input-area { background: var(--ifd-bg); }
+.ifd-header {
+  background: var(--ifd-surface);
+  border-bottom-color: var(--ifd-line);
+  color: var(--ifd-ink);
+  font-weight: 400;
+}
+.ifd-header svg { color: var(--ifd-muted); }
+.ifd-stage .ifd-welcome h3 { color: var(--ifd-accent); font-family: inherit; text-align: center; }
+.ifd-welcome p, .ifd-message-user time, .ifd-sender time,
+.ifd-count, .ifd-feedback, .ifd-accordion-row small,
+.ifd-input-foot { color: var(--ifd-muted); }
+.ifd-welcome button, .ifd-submit {
+  background: var(--ifd-raised);
+  border-color: #795987;
+  color: var(--ifd-accent);
+}
+.ifd-welcome button:hover, .ifd-submit:hover { background: var(--ifd-hover); }
+.ifd-stage :is(button):focus-visible { outline: 2px solid var(--ifd-accent); outline-offset: 3px; }
+.ifd-user-bubble {
+  background: #30203c;
+  border: 1px solid #604a6d;
+  color: var(--ifd-ink);
+}
+.ifd-avatar { background: var(--ifd-raised); border-color: var(--ifd-line); }
+.ifd-sender, .ifd-question-lead, .ifd-response-lead,
+.ifd-form > p, .ifd-radio-option, .ifd-accordion-row,
+.ifd-response-foot { color: var(--ifd-ink); }
+.ifd-question-card, .ifd-response { background: var(--ifd-raised); border: 1px solid var(--ifd-line); }
+.ifd-form { background: var(--ifd-surface); border-color: var(--ifd-line); }
+.ifd-radio { background: var(--ifd-surface); border-color: #91849a; }
+.ifd-radio.is-selected { border-color: var(--ifd-accent); background: var(--ifd-accent); box-shadow: inset 0 0 0 3px var(--ifd-surface); }
+.ifd-accordion-row, .ifd-response-foot { border-color: var(--ifd-line); }
+.ifd-input-box {
+  background: var(--ifd-raised);
+  border-color: #795987;
+  box-shadow: 0 4px 16px #0007;
+}
+.ifd-input-text, .ifd-beat-1 .ifd-input-text { color: var(--ifd-muted); }
+.ifd-input-actions > div, .ifd-input-actions > svg { color: var(--ifd-ink); }
+.ifd-input-foot b, .ifd-input-foot > span:last-child svg,
+.ifd-sparkle, .ifd-question-lead svg, .ifd-response-lead svg { color: var(--ifd-accent); }
+.ifd-cursor { color: var(--ifd-ink); }
+.ifd-beat-5 .ifd-submit { background: var(--ifd-accent); color: #1b1221; }
+
+/* Keep each animated state within the assistant frame. */
+.ifd-chat-area { overflow: hidden; align-items: center; }
+.ifd-welcome { transform: none; text-align: center; }
+.ifd-input-area { padding: 12px; text-align: left; }
+.ifd-input-text { text-align: left; }
+
+/* Give the conversation its intended space at each viewport size. */
+@media (min-width: 701px) { .ifd-stage { width: 100%; aspect-ratio: auto; height: 780px; min-height: 0; } }
+@media (max-width: 700px) { .ifd-stage { height: 820px; } }
+
+.ifd-control-buttons { display: flex; align-items: center; gap: 8px; }
+.ifd-controls button:disabled { opacity: .5; cursor: not-allowed; }
+@media (max-width: 420px) { .ifd-controls { flex-wrap: wrap; gap: 8px; } .ifd-control-buttons { margin-left: auto; } .ifd-controls button { padding: 7px 9px; } }
