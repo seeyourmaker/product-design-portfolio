@@ -11,11 +11,6 @@ import archiveMedia from './data/archiveMedia.json';
 import './AdaptIconFinder.css';
 import './ArchiveProjects.css';
 
-export const archiveListingPath='/projects';
-export const getArchiveSlug=(path:string)=>{
-  const match=path.replace(/\/$/,'').match(/^\/projects\/([^/]+)$/);
-  return match&&archiveProjectBySlug[match[1]]?match[1]:null;
-};
 const mediaFor=(slug:string)=>archiveMedia[slug as keyof typeof archiveMedia] as string[];
 const isVideo=(path:string)=>/\.mp4$/i.test(path);
 const isImage=(path:string)=>/\.(png|jpe?g|gif|webp|svg)$/i.test(path);

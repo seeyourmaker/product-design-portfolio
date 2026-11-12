@@ -3,8 +3,6 @@ import {ArrowLeft,ArrowUpRight,Search,MousePointer2,Users} from 'lucide-react';
 import {gsap} from 'gsap';
 import './AdaptIconFinder.css';
 
-export const adaptPath='/projects/adapt-icon-finder';
-export const isAdaptPath=(path:string)=>[adaptPath,'/projects/adaptive-icon-finder'].includes(path.replace(/\/$/,''));
 const buildSteps=[
   {title:'The existing icon site',tool:'01 / SOURCE',copy:'The GitHub-hosted ADAPT website held the icons our team already used.'},
   {title:'Make the library local',tool:'02 / MY PREPARATION',copy:'I scraped the site and organized the library into a structure the plugin could use.'},

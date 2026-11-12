@@ -125,6 +125,8 @@ The current design and motion implementation remains the source to extend; plann
 - Reviewed routes, assets, dependency state, and commit readiness. Simplified route state, corrected hero heading semantics, removed stale preview text and a production Figma capture script, and split redesign, Intent, and Jira pages into route-loaded chunks.
 - Initial production JavaScript fell from 191.78 kB to 156.15 kB gzip; initial CSS fell from 44.60 kB to 20.88 kB gzip. The homepage avatar now uses a roughly 192 kB transparent WebP in place of a 1.2 MB PNG. The Intent video preloads metadata.
 - Build, whitespace check, offline production dependency audit, and Chrome route smoke checks passed. Clean-checkout media gaps and other remaining findings are recorded in `docs/portfolio-review-2026-11-12.md`.
+- Follow-up pass: ADAPT Icon Finder, the `/projects` listing, and archive project pages are now route-loaded chunks. Their route helpers live in `src/data/adaptRoutes.ts` and `src/data/archiveRoutes.ts`, so the homepage no longer bundles those pages. Initial JavaScript fell from 156.49 kB to 149.17 kB gzip (481.11 kB to 449.69 kB raw); initial CSS fell from 20.88 kB to 16.07 kB gzip (104.15 kB to 77.83 kB raw). Build and type check passed. Browser checks were not run because Lighthouse and headless Chrome could not load local pages on this machine.
+- Checked and left unchanged: homepage media is already small (tool icons 2–17 kB, avatar WebP 149 kB), and every requested Kanit weight from 300 to 900 is used. Framer Motion, GSAP, and React make up most of the remaining initial JavaScript, and the homepage uses all three.
 
 ### Contact page — 12 November 2026
 

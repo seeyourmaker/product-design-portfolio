@@ -12,10 +12,10 @@ import {featuredProjects,type FeaturedProject} from './data/projects';
 import {useMobileAvatarMotion} from './useMobileAvatarMotion';
 import assets from './assets.json';
 import './style.css';
-import {AdaptIconFinder,isAdaptPath} from './AdaptIconFinder';
+import {isAdaptPath} from './data/adaptRoutes';
 import {ImageViewer} from './ImageViewer';
 import {jiraBroQuickLookPath,isJiraBroPath,isJiraBroQuickLookPath} from './data/jiraRoutes';
-import {ArchiveListing,ArchiveProjectPage,getArchiveSlug} from './ArchiveProjects';
+import {getArchiveSlug} from './data/archiveRoutes';
 import {HomeMarquees} from './HomeMarquees';
 import {CatalogThumbnailColumn,CatalogInteractionThumbnail} from './CatalogThumbnails';
 import {canonicalPortfolioPath,chatExperiencePath,chatExperienceQuickLookPath,isChatExperiencePath,isChatExperienceQuickLookPath} from './data/chatExperienceRoutes';
@@ -27,6 +27,9 @@ const IntentCaseStudy=lazy(()=>import('./IntentCaseStudy').then(module=>({defaul
 const JiraBroCaseStudy=lazy(()=>import('./JiraBroCaseStudy').then(module=>({default:module.JiraBroCaseStudy})));
 const JiraBroQuickLook=lazy(()=>import('./JiraBroQuickLook').then(module=>({default:module.JiraBroQuickLook})));
 const IntentQuickLook=lazy(()=>import('./IntentQuickLook').then(module=>({default:module.IntentQuickLook})));
+const AdaptIconFinder=lazy(()=>import('./AdaptIconFinder').then(module=>({default:module.AdaptIconFinder})));
+const ArchiveProjectPage=lazy(()=>import('./ArchiveProjects').then(module=>({default:module.ArchiveProjectPage})));
+const ArchiveListing=lazy(()=>import('./ArchiveProjects').then(module=>({default:module.ArchiveListing})));
 function FadeIn({children,delay=0,y=30,x=0,className=''}:{children:React.ReactNode,delay?:number,y?:number,x?:number,className?:string}){return <motion.div className={className} initial={{opacity:0,x,y}} whileInView={{opacity:1,x:0,y:0}} viewport={{once:true,margin:'50px',amount:0}} transition={{duration:.7,delay,ease:[.25,.1,.25,1]}}>{children}</motion.div>}
 const linkedInProfile='https://www.linkedin.com/in/saurabhhaldankar/';
 function ContactButton(){return <a className="contact-button" href={linkedInProfile} target="_blank" rel="noreferrer">Contact me<span className="quick-look-visually-hidden"> (opens LinkedIn in a new tab)</span></a>}
@@ -188,7 +191,7 @@ function App(){
   const dissolve={duration:reducedMotion?0:.2,ease:'easeInOut' as const};
   const archiveSlug=getArchiveSlug(archiveRoute);
   return <><AnimatePresence mode="wait" initial={false}>{showAdapt
-    ? <motion.div key="adapt-icon-finder" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><AdaptIconFinder/></motion.div>
+    ? <motion.div key="adapt-icon-finder" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><Suspense fallback={<p role="status">Loading project…</p>}><AdaptIconFinder/></Suspense></motion.div>
     : showJiraBroQuickLook
     ? <motion.div key="jirabro-quick-look" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><Suspense fallback={<p role="status">Loading project…</p>}><JiraBroQuickLook onBack={closeJiraBroQuickLook}/></Suspense></motion.div>
     : showJiraBro
@@ -204,9 +207,9 @@ function App(){
     : isChatExperiencePath(archiveRoute)
     ? <motion.div key="chat-case-study" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><Suspense fallback={<p role="status">Loading project…</p>}><ChatExperiencePage/></Suspense></motion.div>
     : archiveSlug
-    ? <motion.div key={archiveSlug} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><ArchiveProjectPage slug={archiveSlug}/></motion.div>
+    ? <motion.div key={archiveSlug} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><Suspense fallback={<p role="status">Loading project…</p>}><ArchiveProjectPage slug={archiveSlug}/></Suspense></motion.div>
     : archiveRoute==='/projects'
-    ? <motion.div key="projects-listing" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><ArchiveListing/></motion.div>
+    ? <motion.div key="projects-listing" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><Suspense fallback={<p role="status">Loading projects…</p>}><ArchiveListing/></Suspense></motion.div>
     : <motion.div key="portfolio" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><main><Hero/><HomeMarquees/><About/><Services/><section id="projects" className="projects"><FadeIn><h2 className="hero-heading">Featured Projects</h2></FadeIn>{featuredProjects.map((project,index)=><ProjectCard key={project.slug} project={project} index={index} onOpen={setProject} onQuickLook={openQuickLook}/>) }<HomeMarquees kind="testimonials"/></section><footer id="contact"><p>Have something in mind?</p><h2 className="hero-heading">Let's create.</h2><a className="footer-contact-link" href={linkedInProfile} target="_blank" rel="noreferrer">Contact me <ArrowUpRight size={20} aria-hidden="true"/><span className="quick-look-visually-hidden"> (opens LinkedIn in a new tab)</span></a><a href="#">Back to top ↑</a></footer></main><dialog ref={dialog} onCancel={()=>setProject(null)} onClick={e=>{if(e.target===dialog.current)setProject(null)}}><button className="close" onClick={()=>setProject(null)} aria-label="Close project"><X/></button>{project!==null&&<><p className="category">{project.category}</p><h3>{project.title}</h3><p className="preview-note">{project.description}</p><div className="modal-thumbnail"><ProjectThumbnail project={project}/></div></>}</dialog></motion.div>}
   </AnimatePresence><ImageViewer/><AnimatePresence>{showLoader&&archiveRoute==='/with-intro.html'&&<PortfolioLoader onDone={finishLoader}/>}</AnimatePresence></>;
 }
