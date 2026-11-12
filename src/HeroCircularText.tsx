@@ -1,12 +1,12 @@
 import {memo} from 'react';
 import './HeroCircularText.css';
 
-const terms = 'Product Design · User Experience · User Interface · UX Research · Design Thinking · Interaction Design · Visual Design · Product Strategy · Information Architecture · User Journeys · Wireframing · Prototyping · Usability Testing · User Flows · Empathy Mapping · Journey Mapping · Design Systems · Design Tokens · Component Libraries · Accessibility · Microinteractions · Design Patterns · Conversational UX · UX Writing · Product Discovery · Service Design · Design Iteration · Problem Solving · Human-Centered Design · User Behavior · Creative Coding · Motion Design · Interactive Experiences · Rapid Prototyping · Visual Storytelling · Scrollytelling · Design Engineering · Generative AI · Agentic AI · AI Copilots · Prompt Engineering · Context Engineering · Human-AI Interaction · Intelligent Automation · Natural Language Processing · Figma · FigJam · Photoshop · Illustrator · After Effects · HTML · CSS · JavaScript · TypeScript · React · Angular · GSAP · Framer Motion · Cursor · Codex'.split(' · ');
+const terms = 'Product Design · User Experience · User Interface · UX Research · Design Thinking · Interaction Design · Visual Design · Product Strategy · Information Architecture · User Journeys · Wireframing · Prototyping · Usability Testing · User Flows · Empathy Mapping · Journey Mapping · Design Systems · Design Tokens · Component Libraries · Accessibility · Microinteractions · Design Patterns · Conversational UX · UX Writing · Product Discovery · Service Design · Design Iteration · Problem Solving · Human-Centered Design · User Behavior · Creative Coding · Motion Design · Interactive Experiences · Rapid Prototyping · Visual Storytelling · Scrollytelling · Design Engineering · Generative AI · Agentic AI · AI Copilots · Prompt Engineering · Context Engineering · Human-AI Interaction · Intelligent Automation · Natural Language Processing · Figma · FigJam · Photoshop · Illustrator · After Effects · HTML · CSS · JavaScript · TypeScript · React · Angular · GSAP · Framer Motion · Cursor · Codex · Claude · Vercel · Lovable'.split(' · ');
 
 // Even radial spacing between the outer and inner Figma circles.
 const outerDiameter = 1579;
 const innerDiameter = 285;
-const termCounts = [11, 10, 9, 8, 7, 5, 4, 4, 2];
+const termCounts = [11, 10, 9, 8, 7, 5, 4, 4, 5];
 const durations = [115, 105, 96, 87, 79, 71, 63, 55, 47];
 const rings = termCounts.map((count, index) => ({
   diameter: outerDiameter - index * (outerDiameter - innerDiameter) / (termCounts.length - 1),

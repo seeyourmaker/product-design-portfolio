@@ -108,17 +108,48 @@ function PortfolioLoader({onDone}:{onDone:()=>void}){
   useEffect(()=>{
     let cancelled=false;
     const timers:number[]=[];
-    const wait=(ms:number)=>new Promise<void>(resolve=>{timers.push(window.setTimeout(resolve,ms))});
     let frame=0;
     const load=async()=>{
-      // Keep the cover in place until the exact display face and hero image are ready.
-      await Promise.race([Promise.all([document.fonts.load('900 96px Kanit','Saurabh H'),document.fonts.load('600 36px Kanit','Product Design · User Experience')]),wait(5000)]);
+      // Preload every homepage font weight and image while the cover is visible.
+      const fontLoads=[300,400,500,600,700,800,900].map(weight=>document.fonts.load(`${weight} 32px Kanit`,'Saurabh H'));
+      const waitForImage=(image:HTMLImageElement)=>new Promise<void>(resolve=>{
+        let settled=false;
+        const finish=()=>{
+          if(settled)return;
+          settled=true;
+          image.removeEventListener('load',finish);
+          image.removeEventListener('error',finish);
+          void image.decode().catch(()=>{}).then(()=>resolve());
+        };
+        image.addEventListener('load',finish,{once:true});
+        image.addEventListener('error',finish,{once:true});
+        image.loading='eager';
+        if(image.complete)finish();
+      });
+      const waitForVideo=(video:HTMLVideoElement)=>new Promise<void>(resolve=>{
+        if(video.readyState>=HTMLMediaElement.HAVE_FUTURE_DATA){resolve();return;}
+        const finish=()=>{
+          video.removeEventListener('canplay',finish);
+          video.removeEventListener('error',finish);
+          resolve();
+        };
+        video.addEventListener('canplay',finish,{once:true});
+        video.addEventListener('error',finish,{once:true});
+        video.preload='auto';
+        if(video.readyState>=HTMLMediaElement.HAVE_FUTURE_DATA)finish();
+        else if(video.networkState===HTMLMediaElement.NETWORK_EMPTY)video.load();
+      });
+      const images=Array.from(document.images);
+      const videos=Array.from(document.querySelectorAll('video'));
+      await Promise.allSettled([
+        ...fontLoads,
+        document.fonts.ready,
+        ...images.map(waitForImage),
+        ...videos.map(waitForVideo),
+      ]);
       if(cancelled)return;
       setFontReady(true);
       frame=requestAnimationFrame(()=>{frame=requestAnimationFrame(()=>{if(!cancelled)setPhase('loading')})});
-      const image=new Image();image.src='/my_avatar_meditating.webp';
-      const ready=image.decode().catch(()=>{});
-      await Promise.all([ready,wait(1400)]);
       // The circular SVG is inside the hero's delayed FadeIn. Let that fade
       // finish behind the cover before revealing the page.
       const heroSettled=()=>{
@@ -160,7 +191,7 @@ function App(){
   const showJiraBro=isJiraBroPath(archiveRoute);
   const showJiraBroQuickLook=isJiraBroQuickLookPath(archiveRoute);
   const reducedMotion=useReducedMotion();
-  const [showLoader,setShowLoader]=useState(()=>window.location.pathname==='/with-intro.html');
+  const [showLoader,setShowLoader]=useState(()=>window.location.pathname==='/'||window.location.pathname==='/with-intro.html');
   const finishLoader=React.useCallback(()=>setShowLoader(false),[]);
   const dialog=useRef<HTMLDialogElement>(null);
   useEffect(()=>{if(project!==null)dialog.current?.showModal();else dialog.current?.close()},[project]);
@@ -189,6 +220,7 @@ function App(){
     setArchiveRoute('/');
   };
   const dissolve={duration:reducedMotion?0:.2,ease:'easeInOut' as const};
+  const isIntroRoute=archiveRoute===''||archiveRoute==='/with-intro.html';
   const archiveSlug=getArchiveSlug(archiveRoute);
   return <><AnimatePresence mode="wait" initial={false}>{showAdapt
     ? <motion.div key="adapt-icon-finder" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><Suspense fallback={<p role="status">Loading project…</p>}><AdaptIconFinder/></Suspense></motion.div>
@@ -213,6 +245,6 @@ function App(){
     : archiveRoute==='/projects'
     ? <motion.div key="projects-listing" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><Suspense fallback={<p role="status">Loading projects…</p>}><ArchiveListing/></Suspense></motion.div>
     : <motion.div key="portfolio" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} transition={dissolve}><main><Hero/><HomeMarquees/><About/><Services/><section id="projects" className="projects"><FadeIn><h2 className="hero-heading">Featured Projects</h2></FadeIn>{featuredProjects.map((project,index)=><ProjectCard key={project.slug} project={project} index={index} onOpen={setProject} onQuickLook={openQuickLook}/>) }<HomeMarquees kind="testimonials"/></section><footer id="contact"><p>Have something in mind?</p><h2 className="hero-heading">Let's create.</h2><a className="footer-contact-link" href="/contact">Contact me <ArrowUpRight size={20} aria-hidden="true"/></a><a href="#">Back to top ↑</a></footer></main><dialog ref={dialog} onCancel={()=>setProject(null)} onClick={e=>{if(e.target===dialog.current)setProject(null)}}><button className="close" onClick={()=>setProject(null)} aria-label="Close project"><X/></button>{project!==null&&<><p className="category">{project.category}</p><h3>{project.title}</h3><p className="preview-note">{project.description}</p><div className="modal-thumbnail"><ProjectThumbnail project={project}/></div></>}</dialog></motion.div>}
-  </AnimatePresence><ImageViewer/><AnimatePresence>{showLoader&&archiveRoute==='/with-intro.html'&&<PortfolioLoader onDone={finishLoader}/>}</AnimatePresence></>;
+  </AnimatePresence><ImageViewer/><AnimatePresence>{showLoader&&isIntroRoute&&<PortfolioLoader onDone={finishLoader}/>}</AnimatePresence></>;
 }
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);
