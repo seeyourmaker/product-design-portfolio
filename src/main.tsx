@@ -32,7 +32,7 @@ const AdaptIconFinder=lazy(()=>import('./AdaptIconFinder').then(module=>({defaul
 const ArchiveProjectPage=lazy(()=>import('./ArchiveProjects').then(module=>({default:module.ArchiveProjectPage})));
 const ArchiveListing=lazy(()=>import('./ArchiveProjects').then(module=>({default:module.ArchiveListing})));
 function FadeIn({children,delay=0,y=30,x=0,className=''}:{children:React.ReactNode,delay?:number,y?:number,x?:number,className?:string}){return <motion.div className={className} initial={{opacity:0,x,y}} whileInView={{opacity:1,x:0,y:0}} viewport={{once:true,margin:'50px',amount:0}} transition={{duration:.7,delay,ease:[.25,.1,.25,1]}}>{children}</motion.div>}
-function ContactButton(){return <a className="contact-button" href="/contact">Contact me</a>}
+function ContactButton(){return <a className="contact-button" href="#projects">Explore my work</a>}
 function Magnet({children,shadowRef}:{children:React.ReactNode,shadowRef:React.RefObject<HTMLDivElement>}){
   const ref=useRef<HTMLDivElement>(null);
   const moving=useRef<HTMLDivElement>(null);
