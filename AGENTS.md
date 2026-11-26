@@ -14,6 +14,13 @@
 - Preserve keyboard access, native dialog behavior, focus visibility, and reduced-motion fallbacks when changing interactions.
 - Do not replace approved project direction with reference-template names, copy, imagery, or branding. The planned featured project names are specified in `PROJECT_STATUS.md`.
 
+## Design system
+
+- The design system lives in `docs/design-system/`. Read its `README.md` before changing visual styles; follow `applying.md` when moving existing CSS onto tokens.
+- `docs/design-system/tokens.json` is the single source of tokens. Never hand-edit `src/tokens.css`; change `tokens.json` and run `python3 scripts/build-tokens.py`.
+- Style new or changed UI with the token custom properties (`var(--ink)`, `var(--space-24)`, `var(--radius-pill)`) instead of literal values. Case studies set their colour with an `.accent-*` class and read `var(--accent)`.
+- Product recreations inside case studies (mock UIs, Quick Look films, thumbnail internals, diagrams) may keep literal values so they match the real products.
+
 ## Reuse and visual conventions
 
 - Extend the existing components and CSS patterns in `src/main.tsx` and `src/style.css` before introducing new component files or styling systems.

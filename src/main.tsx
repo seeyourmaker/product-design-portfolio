@@ -11,6 +11,7 @@ import {intentQuickLookPath,isIntentCaseStudyPath} from './data/intentRoutes';
 import {featuredProjects,type FeaturedProject} from './data/projects';
 import {useMobileAvatarMotion} from './useMobileAvatarMotion';
 import assets from './assets.json';
+import './tokens.css';
 import './style.css';
 import {isAdaptPath} from './data/adaptRoutes';
 import {ImageViewer} from './ImageViewer';

@@ -1,5 +1,13 @@
 # Project Status
 
+## 26 November 2026 design system
+
+- Added the portfolio design system in `docs/design-system/`: `tokens.json` (single source), a brand book (`README.md`), component guidance and `applying.md` with the migration maps. It was derived from the existing CSS and refined: consolidated colour, radius, type, tracking, spacing and breakpoint scales; one accent per project, shared by its homepage thumbnail and case study; one shared case-study shell; a paper theme for Local Gigs with a text-safe orange (`#b8431a`, 4.7:1) and `#f06a39` kept for fills.
+- `scripts/build-tokens.py` generates `src/tokens.css`, which `src/main.tsx` imports before `style.css`. No stylesheet reads the tokens yet, so there is no visual change; `npm run build` passes.
+- Removed the five unused motionsites.ai GIF entries from `src/assets.json`.
+- Planned: move the in-scope stylesheets onto the tokens and the shared case-study shell (see `docs/design-system/applying.md`). Expected visual shifts: unified case-study titles (Chat and Local Gigs titles get smaller and lose uppercase or oversized treatment), 1–8px radius and size changes, Intent and Chat thumbnail accents matching their case studies, Kanit trimmed to five weights. Product recreations keep their literal values.
+- Planned after that: refine the Local Gigs case study on the paper theme.
+
 ## 12 November 2026 final content decisions
 
 - Contact me, the header Contact item, and the footer contact action open https://www.linkedin.com/in/saurabhhaldankar/. The email contact form is not part of the site. Navigation labels stay About, Expertise, Projects, and Contact.

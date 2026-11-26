@@ -1,0 +1,125 @@
+/* Saurabh Portfolio design tokens. Generated from docs/design-system/tokens.json by scripts/build-tokens.py; do not edit by hand. */
+:root{
+  --bg-page:#0c0c0c;
+  --surface-1:#141414;
+  --surface-2:#191919;
+  --surface-3:#202020;
+  --surface-4:#252525;
+  --ink:#d7e2ea;
+  --ink-soft:#bbccd7;
+  --ink-muted:#aab8bf;
+  --ink-dim:#646973;
+  --line:#d7e2ea38;
+  --line-strong:#d7e2ea;
+  --wash-hover:#d7e2ea1a;
+  --focus:#cf75ff;
+  --accent:var(--focus);
+  --on-accent:#0c0c0c;
+  --selection:#7621b0;
+  --backdrop:#000000bb;
+  --white:#ffffff;
+  --cta-grad-1:#18011f;
+  --cta-grad-2:#b600a8;
+  --cta-grad-3:#7621b0;
+  --cta-grad-4:#be4c00;
+  --cta-glow:#7721b1;
+  --band-light-bg:#ffffff;
+  --band-light-ink:#0c0c0c;
+  --band-light-rule:#0c0c0c26;
+  --accent-intent:#cf9aef;
+  --accent-chat:#87b5ea;
+  --accent-jira:#83e0cf;
+  --accent-adapt:#ffbf69;
+  --accent-gigs:#b8431a;
+  --accent-gigs-fill:#f06a39;
+  --lime-gigs:#ddeb78;
+  --accent-contact:#aab9ff;
+  --font-kanit:Kanit, sans-serif;
+  --space-4:4px;
+  --space-8:8px;
+  --space-12:12px;
+  --space-16:16px;
+  --space-20:20px;
+  --space-24:24px;
+  --space-32:32px;
+  --space-40:40px;
+  --space-48:48px;
+  --space-64:64px;
+  --space-80:80px;
+  --space-96:96px;
+  --space-128:128px;
+  --space-160:160px;
+  --radius-xs:4px;
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:16px;
+  --radius-xl:24px;
+  --radius-2xl:32px;
+  --radius-3xl:40px;
+  --radius-4xl:60px;
+  --radius-pill:999px;
+  --radius-round:50%;
+  --shadow-cta:0 4px 4px #b501a740, inset 4px 4px 12px #7721b1;
+  --shadow-evidence:0 28px 90px #00000088;
+  --shadow-hard:8px 8px 0 #24231f;
+  --shadow-hard-soft:10px 12px 0 #24231f30;
+  --shadow-glow:0 0 70px #8363ff60, 0 0 160px #b600a840;
+  --weight-light:300;
+  --weight-regular:400;
+  --weight-medium:500;
+  --weight-bold:700;
+  --weight-black:900;
+  --tracking-tighter:-0.06em;
+  --tracking-tight:-0.04em;
+  --tracking-snug:-0.025em;
+  --tracking-normal:0;
+  --tracking-wide:0.05em;
+  --tracking-wider:0.1em;
+  --tracking-widest:0.12em;
+  --tracking-cta:0.15em;
+  --leading-display:1;
+  --leading-title:1.05;
+  --leading-heading:1.2;
+  --leading-ui:1.5;
+  --leading-body:1.65;
+  --duration-fast:200ms;
+  --duration-base:400ms;
+  --duration-enter:700ms;
+  --ease-enter:cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-standard:ease;
+  --ease-reveal:cubic-bezier(0.65, 0, 0.15, 1);
+  --gutter:40px;
+  --gutter-mobile:24px;
+  --content-max:1344px;
+  --nav-max:1440px;
+  --prose-max:650px;
+  --sticky-top:128px;
+  --bp-laptop:1199px;
+  --bp-tablet:1023px;
+  --bp-mobile:767px;
+  --bp-phone:639px;
+  --bp-narrow:420px;
+}
+.accent-intent{--accent:var(--accent-intent)}
+.accent-chat{--accent:var(--accent-chat)}
+.accent-jira{--accent:var(--accent-jira)}
+.accent-adapt{--accent:var(--accent-adapt)}
+.accent-gigs{--accent:var(--accent-gigs)}
+.accent-contact{--accent:var(--accent-contact)}
+.lg-case,[data-theme="paper"]{
+  --bg-page:#f1eee5;
+  --surface-1:#e8e3d6;
+  --surface-2:#ffffff;
+  --surface-3:#ffffff;
+  --surface-4:#e8e3d6;
+  --ink:#24231f;
+  --ink-soft:#24231f;
+  --ink-muted:#5c5b54;
+  --ink-dim:#77756c;
+  --line:#24231f40;
+  --line-strong:#24231f;
+  --wash-hover:#24231f1a;
+  --focus:#b8431a;
+  --on-accent:#ffffff;
+  --accent:var(--accent-gigs);
+}

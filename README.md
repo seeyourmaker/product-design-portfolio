@@ -36,9 +36,12 @@ The build runs TypeScript checking and creates production files in `dist/`.
 ```text
 src/
   main.tsx       App sections, interactions, project previews, routing placeholder
+  tokens.css     Design tokens as CSS custom properties (generated)
   style.css      Tailwind directives, visual system, responsive and motion styles
   assets.json    Media manifest (use approved assets only)
 public/          Locally served images
+docs/design-system/  Design system: tokens.json (source), brand book, component guidance
+scripts/build-tokens.py  Regenerates src/tokens.css from tokens.json
 ```
 
 ## Planned information architecture
